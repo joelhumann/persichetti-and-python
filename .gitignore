@@ -1,10 +1,56 @@
-echo "__pycache__/
-*.pyc
-output/*
-!output/.keep
-output/scores/*
-!output/scores/.keep
-engravers/
+# === Python artifacts ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# === Environment and tooling ===
+.env
+.venv/
+venv/
+ENV/
+env/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# === IDEs and editor files ===
 .vscode/
 .idea/
-" > .gitignore
+*.swp
+*~
+
+# === Test output and cache ===
+*.log
+*.tmp
+*.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# === Output files (scores, renders, exports) ===
+output/
+!output/.keep
+output/scores/
+!output/scores/.keep
+
+# === Build artifacts ===
+build/
+dist/
+*.egg-info/
+
+# === engravers directory (rendered assets only) ===
+engravers/**/*.pdf
+engravers/**/*.mid
+engravers/**/*.midi
+engravers/**/*.png
+engravers/**/*.svg
+engravers/**/*.log
+engravers/**/*.tex
+
+# === OS metadata ===
+.DS_Store
+Thumbs.db
+
+# === Notebook checkpoints ===
+.ipynb_checkpoints/
