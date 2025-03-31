@@ -11,7 +11,7 @@ class Element:
     """
 
     def __init__(self, duration: int):
-        if duration < 1:
+        if duration is not None and duration < 1:
             raise ValueError("Element duration must be ≥ 1 quantum or None for indefinite.")
         self.duration = duration
 

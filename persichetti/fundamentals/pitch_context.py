@@ -32,8 +32,12 @@ class PitchContext:
         self.reference_pitch = reference_pitch
 
         if isinstance(pitch_source, ModalSystem):
-            # ModalSystem includes tonality — we extract its tonicized pitch classes
-            self.pitch_set = set(pitch_source.absolute_pitch_classes())
+            # Store modal logic explicitly
+            self.modal_system = pitch_source
+            self.tonic = pitch_source.tonic
+            self.scale = pitch_source.scale
+            # Rotate pitch classes so that modal tonic becomes pitch class 0
+            self.pitch_set = set((pc - self.tonic) % 12 for pc in self.scale.pitch_classes)
 
         elif isinstance(pitch_source, Scale):
             # A Scale is tonic-free — we take its pitch classes as-is
@@ -53,7 +57,8 @@ class PitchContext:
         Check whether the given pitch (as integer) is allowed in this context.
         Validity is based on %12 membership in the pitch_set.
         """
-        return pitch % 12 in self.pitch_set
+        pc = pitch % 12
+        return pc in self.pitch_set
     
     def get_reference(self, first_pitch: Optional[int] = None) -> int:
         """
