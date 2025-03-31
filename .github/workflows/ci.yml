@@ -36,4 +36,5 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pytest tests/
+        pytest --cov=persichetti --cov-report=term-missing
+
