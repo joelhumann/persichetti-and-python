@@ -1,5 +1,7 @@
 # Persichetti and Python
 
+![CI](https://github.com/joelhumann/persichetti-and-python/actions/workflows/ci.yml/badge.svg)
+
 A compositional and theoretical toolkit inspired by Vincent Persichetti’s *Twentieth-Century Harmony*.
 
 - Modular Python classes for pitch, intervals, scales, motifs, and textures
