@@ -1,0 +1,6 @@
+Metadata-Version: 2.1
+Name: persichetti
+Version: 0.1
+Summary: A compositional operating system based on Vincent Persichetti's Twentieth-Century Harmony
+Author: Your Name
+Requires-Python: >=3.8

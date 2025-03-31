@@ -1,0 +1,10 @@
+echo "__pycache__/
+*.pyc
+output/*
+!output/.keep
+output/scores/*
+!output/scores/.keep
+engravers/
+.vscode/
+.idea/
+" > .gitignore
