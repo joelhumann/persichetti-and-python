@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.core.scales &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">persichetti.core.scales</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for persichetti.core.scales</h1><div class="highlight"><pre>
+<span></span><span class="c1"># scales.py — Modal Systems and Interchange Tools</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="c1"># --- Core Structures ---</span>
+
+<div class="viewcode-block" id="Scale">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.Scale">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Scale</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a generic scale type by name and pitch-class content.</span>
+<span class="sd">    Pitch classes are relative to a tonic (assumed to be 0).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">pitch_classes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">category</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">symmetric</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">multi_octave</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitch_classes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_classes</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">description</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">category</span> <span class="o">=</span> <span class="n">category</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer_category</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symmetric</span> <span class="o">=</span> <span class="n">symmetric</span> <span class="k">if</span> <span class="n">symmetric</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">infer_symmetry</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multi_octave</span> <span class="o">=</span> <span class="n">multi_octave</span>
+
+<div class="viewcode-block" id="Scale.infer_category">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.Scale.infer_category">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">infer_category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Infer the category based on the number of pitch classes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">categories</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;pentatonic&quot;</span><span class="p">,</span>
+            <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;hexatonic&quot;</span><span class="p">,</span>
+            <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;heptatonic&quot;</span><span class="p">,</span>
+            <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;octatonic&quot;</span><span class="p">,</span>
+            <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;dodecatonic&quot;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">categories</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cardinality</span><span class="si">}</span><span class="s2">-tone&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Scale.infer_symmetry">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.Scale.infer_symmetry">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">infer_symmetry</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determines if the pitch class set is rotationally symmetric.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_classes</span>
+        <span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+            <span class="n">rotated</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">pc</span> <span class="o">+</span> <span class="n">shift</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pcs</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">rotated</span> <span class="o">==</span> <span class="n">pcs</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ModalSystem">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalSystem">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModalSystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a mode: a specific tonicized realization of a scale.</span>
+<span class="sd">    Also includes optional aliases and modal system membership.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tonic</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Scale</span><span class="p">,</span>
+        <span class="n">aliases</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">as_mode_of</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span> <span class="o">=</span> <span class="n">tonic</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span> <span class="o">=</span> <span class="n">aliases</span> <span class="ow">or</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">as_mode_of</span> <span class="o">=</span> <span class="n">as_mode_of</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triadic_hierarchy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="ModalSystem.degree_to_pc">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalSystem.degree_to_pc">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">degree_to_pc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert a scale degree (0-indexed) to absolute pitch class.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">[</span><span class="n">degree</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">cardinality</span><span class="p">])</span> <span class="o">%</span> <span class="mi">12</span></div>
+
+
+<div class="viewcode-block" id="ModalSystem.pc_to_degree">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalSystem.pc_to_degree">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pc_to_degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pc</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert an absolute pitch class to degree within this mode.</span>
+<span class="sd">        Returns None if not in scale.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rel_pc</span> <span class="o">=</span> <span class="p">(</span><span class="n">pc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">if</span> <span class="n">rel_pc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">rel_pc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="ModalSystem.absolute_pitch_classes">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalSystem.absolute_pitch_classes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">absolute_pitch_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the set of absolute pitch classes for this mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{(</span><span class="bp">self</span><span class="o">.</span><span class="n">tonic</span> <span class="o">+</span> <span class="n">pc</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">}</span></div>
+</div>
+
+<span class="c1"># --- Roman Numeral Utilities (Heptatonic Only) ---</span>
+
+<div class="viewcode-block" id="degree_to_roman">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.degree_to_roman">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">degree_to_roman</span><span class="p">(</span><span class="n">degree</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a scale degree (0-indexed), return the Roman numeral with chord quality</span>
+<span class="sd">    based on triadic construction: major, minor, diminished, or augmented.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">third</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">fifth</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">)</span>
+
+    <span class="n">interval_3rd</span> <span class="o">=</span> <span class="p">(</span><span class="n">third</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+    <span class="n">interval_5th</span> <span class="o">=</span> <span class="p">(</span><span class="n">fifth</span> <span class="o">-</span> <span class="n">root</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+
+    <span class="n">numeral</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">,</span> <span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">][</span><span class="n">degree</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">interval_3rd</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">interval_5th</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numeral</span>
+    <span class="k">elif</span> <span class="n">interval_3rd</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">interval_5th</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numeral</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">interval_3rd</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">interval_5th</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numeral</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;°&quot;</span>
+    <span class="k">elif</span> <span class="n">interval_3rd</span> <span class="o">==</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">interval_5th</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numeral</span> <span class="o">+</span> <span class="s2">&quot;+&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numeral</span> <span class="o">+</span> <span class="s2">&quot;(?)&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="roman_to_degree">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.roman_to_degree">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">roman_to_degree</span><span class="p">(</span><span class="n">roman</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert Roman numeral (with ° or +) to a scale degree index.</span>
+<span class="sd">    Assumes a heptatonic modal system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">cardinality</span> <span class="o">!=</span> <span class="mi">7</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">base</span> <span class="o">=</span> <span class="n">roman</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;°&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;III&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">base</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># --- ModalTransformer ---</span>
+
+<div class="viewcode-block" id="ModalTransformer">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalTransformer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ModalTransformer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Enables modal interchange, modulation, and transformation across a collection of modal systems.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modal_dicts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">modal_families</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group_modal_systems_by_scale_type</span><span class="p">(</span><span class="o">*</span><span class="n">modal_dicts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_modes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">modal_dicts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">all_modes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ModalTransformer.group_modal_systems_by_scale_type">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalTransformer.group_modal_systems_by_scale_type">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">group_modal_systems_by_scale_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">modal_dicts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Group ModalSystem instances by their parent scale type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">grouped</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">modal_dict</span> <span class="ow">in</span> <span class="n">modal_dicts</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="n">modal_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">as_mode_of</span><span class="p">:</span>
+                    <span class="n">grouped</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">as_mode_of</span><span class="p">,</span> <span class="p">{})[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="k">return</span> <span class="n">grouped</span></div>
+
+
+<div class="viewcode-block" id="ModalTransformer.modal_interchange">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalTransformer.modal_interchange">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modal_interchange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">,</span> <span class="n">target_mode_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModalSystem</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change mode name but preserve tonic. Returns new ModalSystem or None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_modes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="n">target_mode_name</span> <span class="ow">and</span> <span class="n">mode</span><span class="o">.</span><span class="n">tonic</span> <span class="o">==</span> <span class="n">source</span><span class="o">.</span><span class="n">tonic</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">mode</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="ModalTransformer.modal_modulation">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalTransformer.modal_modulation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modal_modulation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">,</span> <span class="n">new_tonic</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModalSystem</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Change tonic while preserving mode identity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ModalSystem</span><span class="p">(</span>
+            <span class="n">tonic</span><span class="o">=</span><span class="n">new_tonic</span><span class="p">,</span>
+            <span class="n">scale</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+            <span class="n">aliases</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="n">aliases</span><span class="p">,</span>
+            <span class="n">as_mode_of</span><span class="o">=</span><span class="n">source</span><span class="o">.</span><span class="n">as_mode_of</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ModalTransformer.full_modal_transformation">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.ModalTransformer.full_modal_transformation">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">full_modal_transformation</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">source</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">,</span>
+        <span class="n">new_mode_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">new_tonic</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModalSystem</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optional mode and/or tonic change. Returns new ModalSystem or None.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">new_mode_name</span><span class="p">:</span>
+            <span class="n">target_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_modes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">new_mode_name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">target_mode</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">tonic</span> <span class="o">=</span> <span class="n">new_tonic</span> <span class="k">if</span> <span class="n">new_tonic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">source</span><span class="o">.</span><span class="n">tonic</span>
+            <span class="k">return</span> <span class="n">ModalSystem</span><span class="p">(</span>
+                <span class="n">tonic</span><span class="o">=</span><span class="n">tonic</span><span class="p">,</span>
+                <span class="n">scale</span><span class="o">=</span><span class="n">target_mode</span><span class="o">.</span><span class="n">scale</span><span class="p">,</span>
+                <span class="n">aliases</span><span class="o">=</span><span class="n">target_mode</span><span class="o">.</span><span class="n">aliases</span><span class="p">,</span>
+                <span class="n">as_mode_of</span><span class="o">=</span><span class="n">target_mode</span><span class="o">.</span><span class="n">as_mode_of</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">new_tonic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">modal_modulation</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">new_tonic</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">source</span></div>
+</div>
+
+<span class="c1"># --- Diatonic Scale and Modes (Heptatonic) ---</span>
+
+<span class="n">DIATONIC_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Standard major scale&quot;</span><span class="p">)</span>
+
+<span class="n">DIATONIC_MODES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Ionian&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Major&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Dorian&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Phrygian&quot;</span><span class="p">:</span>   <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Lydian&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Mixolydian&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Aeolian&quot;</span><span class="p">:</span>    <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Natural Minor&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Locrian&quot;</span><span class="p">:</span>    <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="c1"># --- Persichetti&#39;s Triadic Hierarchies for Diatonic Modes ---</span>
+
+<span class="n">DIATONIC_TRIADIC_HIERARCHIES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Dorian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;ii&quot;</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;vi°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Primary chords emphasize the raised 6th (A natural in C Dorian), found in ii and IV.&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;Phrygian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">,</span> <span class="s2">&quot;vii&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;iv&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;v°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Primary chords emphasize the flat 2nd (Db in C Phrygian), in II and i. V° is treated carefully.&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;Lydian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">,</span> <span class="s2">&quot;vii&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;iii&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;iv°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Primary chords emphasize the raised 4th (F# in C Lydian), found in II and vii.&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;Mixolydian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;vii&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ii&quot;</span><span class="p">,</span> <span class="s2">&quot;iii&quot;</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;iv°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Primary chords emphasize the flat 7th (Bb in C Mixolydian), found in vii and v.&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;Ionian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;I&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;ii&quot;</span><span class="p">,</span> <span class="s2">&quot;iii&quot;</span><span class="p">,</span> <span class="s2">&quot;vi&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;vii°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Standard tonal hierarchy: tonic, subdominant, dominant. Functional harmony using leading tone.&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;Aeolian&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;tonic&quot;</span><span class="p">:</span> <span class="s2">&quot;i&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;primary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;i&quot;</span><span class="p">,</span> <span class="s2">&quot;iv&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;secondary&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;diminished&quot;</span><span class="p">:</span> <span class="s2">&quot;ii°&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Natural minor harmonic structure. V remains minor (no raised leading tone).&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1"># --- Attach hierarchies to modes ---</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">mode</span> <span class="ow">in</span> <span class="n">DIATONIC_MODES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">DIATONIC_TRIADIC_HIERARCHIES</span><span class="p">:</span>
+        <span class="n">mode</span><span class="o">.</span><span class="n">triadic_hierarchy</span> <span class="o">=</span> <span class="n">DIATONIC_TRIADIC_HIERARCHIES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+<span class="c1"># --- Melodic Minor Scale and Modes (Jazz Ascending Form) ---</span>
+
+<span class="n">MELODIC_MINOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span>
+    <span class="s2">&quot;Melodic Minor&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Jazz melodic minor (ascending)&quot;</span>
+<span class="p">)</span>
+
+<span class="n">MELODIC_MINOR_MODES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Melodic Minor&quot;</span><span class="p">:</span>        <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Dorian b2&quot;</span><span class="p">:</span>            <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Lydian Augmented&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Overtone&quot;</span><span class="p">:</span>             <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Lydian Dominant&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Mixolydian b6&quot;</span><span class="p">:</span>        <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Locrian ♮2&quot;</span><span class="p">:</span>           <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Super Locrian&quot;</span><span class="p">:</span>        <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Altered&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Melodic Minor&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="c1"># --- Harmonic Minor Scale and Modes (Classical Source) ---</span>
+
+<span class="n">HARMONIC_MINOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span>
+    <span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">,</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Classical harmonic minor&quot;</span>
+<span class="p">)</span>
+
+<span class="n">HARMONIC_MINOR_MODES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">:</span>        <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Locrian ♮6&quot;</span><span class="p">:</span>            <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Ionian ♯5&quot;</span><span class="p">:</span>             <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Dorian ♯4&quot;</span><span class="p">:</span>             <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Phrygian Dominant&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Lydian ♯2&quot;</span><span class="p">:</span>             <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;Super Locrian ♭♭7&quot;</span><span class="p">:</span>     <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Harmonic Minor&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="c1"># --- Synthetic Heptatonic Scale Types (Exotic Modes) ---</span>
+
+<span class="n">NEAPOLITAN_MINOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Neapolitan Minor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">NEAPOLITAN_MAJOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Neapolitan Major&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">ORIENTAL_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Oriental&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">DOUBLE_HARMONIC_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Double Harmonic&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">ENIGMATIC_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Enigmatic&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">HUNGARIAN_MINOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Hungarian Minor&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">LEADING_WHOLETONE_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Leading Whole-Tone&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+<span class="n">HUNGARIAN_MAJOR_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Hungarian Major&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;heptatonic&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- Generic Mode Builder ---</span>
+
+<span class="n">SYNTHETIC_MODES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="add_synthetic_modes">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.add_synthetic_modes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_synthetic_modes</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="n">Scale</span><span class="p">,</span> <span class="n">degrees</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tonic</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">th mode of </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">SYNTHETIC_MODES</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="n">tonic</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="c1"># --- Add modal systems for each synthetic scale ---</span>
+
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Neapolitan Minor&quot;</span><span class="p">,</span> <span class="n">NEAPOLITAN_MINOR_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Neapolitan Major&quot;</span><span class="p">,</span> <span class="n">NEAPOLITAN_MAJOR_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Oriental&quot;</span><span class="p">,</span> <span class="n">ORIENTAL_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Double Harmonic&quot;</span><span class="p">,</span> <span class="n">DOUBLE_HARMONIC_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Enigmatic&quot;</span><span class="p">,</span> <span class="n">ENIGMATIC_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Hungarian Minor&quot;</span><span class="p">,</span> <span class="n">HUNGARIAN_MINOR_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Leading Whole-Tone&quot;</span><span class="p">,</span> <span class="n">LEADING_WHOLETONE_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+<span class="n">add_synthetic_modes</span><span class="p">(</span><span class="s2">&quot;Hungarian Major&quot;</span><span class="p">,</span> <span class="n">HUNGARIAN_MAJOR_SCALE</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="c1"># --- Pentatonic Scale Types ---</span>
+
+<span class="n">PENTATONIC_DIATONIC_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;pentatonic&quot;</span><span class="p">)</span>
+<span class="n">PELOG_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Pelog&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;pentatonic&quot;</span><span class="p">)</span>
+<span class="n">HIRAJOSHI_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Hirajoshi&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;pentatonic&quot;</span><span class="p">)</span>
+<span class="n">KUMOI_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Kumoi&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;pentatonic&quot;</span><span class="p">)</span>
+
+<span class="n">DIATONIC_PENTATONIC_MODES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;1st mode of Diatonic Pentatonic&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Major Pentatonic&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;2nd mode of Diatonic Pentatonic&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;3rd mode of Diatonic Pentatonic&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;4th mode of Diatonic Pentatonic&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">),</span>
+    <span class="s2">&quot;5th mode of Diatonic Pentatonic&quot;</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Minor Pentatonic&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Diatonic Pentatonic&quot;</span><span class="p">),</span>
+<span class="p">}</span>
+
+
+<span class="c1"># --- Hexatonic Scale Types ---</span>
+
+<span class="n">SIX_TONE_SYMMETRICAL_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Six-Tone Symmetrical&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;hexatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">PROMETHEUS_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Prometheus&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;hexatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">PROMETHEUS_NEAPOLITAN_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Prometheus Neapolitan&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;hexatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">WHOLE_TONE_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Whole-Tone&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;hexatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+<span class="c1"># --- Octatonic Scales ---</span>
+
+<span class="n">SYMMETRICAL_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Symmetrical&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;octatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">EIGHT_TONE_SPANISH_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Eight-Tone Spanish&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;octatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Aliased modal entries for symmetrical octatonics</span>
+<span class="n">HALF_WHOLE_DIMINISHED</span> <span class="o">=</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">SYMMETRICAL_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Half-Whole Diminished&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Symmetrical&quot;</span><span class="p">)</span>
+<span class="n">WHOLE_HALF_DIMINISHED</span> <span class="o">=</span> <span class="n">ModalSystem</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">SYMMETRICAL_SCALE</span><span class="p">,</span> <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Whole-Half Diminished&quot;</span><span class="p">],</span> <span class="n">as_mode_of</span><span class="o">=</span><span class="s2">&quot;Symmetrical&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># --- Chromatic Scale (12-tone) ---</span>
+
+<span class="n">CHROMATIC_SCALE</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="s2">&quot;Chromatic&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">)),</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;dodecatonic&quot;</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># --- User-Defined Scale Registries ---</span>
+
+<span class="n">USER_DEFINED_SCALES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Scale</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Stores user-defined scales. Differentiates multi-octave via the `multi_octave` flag in Scale object.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">USER_DEFINED_ALIASES</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Maps user-defined aliases to canonical scale names. Core definitions remain unmodified.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="c1"># --- Add a User-Defined Scale ---</span>
+
+<div class="viewcode-block" id="add_user_defined_scale">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.add_user_defined_scale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_user_defined_scale</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">pitch_classes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+    <span class="n">aliases</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">multi_octave</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a new scale if it&#39;s not already present in any registry.</span>
+<span class="sd">    If the pitch class set exists, only new aliases are registered.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_classes</span><span class="p">))</span>
+
+    <span class="c1"># Check predefined scales</span>
+    <span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="n">DIATONIC_SCALE</span><span class="p">,</span> <span class="n">MELODIC_MINOR_SCALE</span><span class="p">,</span> <span class="n">HARMONIC_MINOR_SCALE</span><span class="p">,</span>
+        <span class="n">DOUBLE_HARMONIC_SCALE</span><span class="p">,</span> <span class="n">ENIGMATIC_SCALE</span><span class="p">,</span> <span class="n">NEAPOLITAN_MINOR_SCALE</span><span class="p">,</span> <span class="n">NEAPOLITAN_MAJOR_SCALE</span><span class="p">,</span>
+        <span class="n">HUNGARIAN_MINOR_SCALE</span><span class="p">,</span> <span class="n">HUNGARIAN_MAJOR_SCALE</span><span class="p">,</span> <span class="n">LEADING_WHOLETONE_SCALE</span><span class="p">,</span>
+        <span class="n">ORIENTAL_SCALE</span><span class="p">,</span> <span class="n">SYMMETRICAL_SCALE</span><span class="p">,</span> <span class="n">WHOLE_TONE_SCALE</span><span class="p">,</span> <span class="n">PROMETHEUS_SCALE</span><span class="p">,</span>
+        <span class="n">PROMETHEUS_NEAPOLITAN_SCALE</span><span class="p">,</span> <span class="n">SIX_TONE_SYMMETRICAL_SCALE</span><span class="p">,</span>
+        <span class="n">PENTATONIC_DIATONIC_SCALE</span><span class="p">,</span> <span class="n">PELOG_SCALE</span><span class="p">,</span> <span class="n">HIRAJOSHI_SCALE</span><span class="p">,</span> <span class="n">KUMOI_SCALE</span><span class="p">,</span>
+        <span class="n">EIGHT_TONE_SPANISH_SCALE</span><span class="p">,</span> <span class="n">CHROMATIC_SCALE</span>
+    <span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span> <span class="o">==</span> <span class="n">normalized</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">:</span>
+                    <span class="n">USER_DEFINED_ALIASES</span><span class="p">[</span><span class="n">alias</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">return</span> <span class="n">scale</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="c1"># Check user-defined registry</span>
+    <span class="k">for</span> <span class="n">existing</span> <span class="ow">in</span> <span class="n">USER_DEFINED_SCALES</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">existing</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span> <span class="o">==</span> <span class="n">normalized</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">:</span>
+                    <span class="n">USER_DEFINED_ALIASES</span><span class="p">[</span><span class="n">alias</span><span class="p">]</span> <span class="o">=</span> <span class="n">existing</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">return</span> <span class="n">existing</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="c1"># Store new user-defined scale</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">normalized</span><span class="p">,</span> <span class="n">multi_octave</span><span class="o">=</span><span class="n">multi_octave</span><span class="p">)</span>
+    <span class="n">USER_DEFINED_SCALES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span>
+    <span class="k">if</span> <span class="n">aliases</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">alias</span> <span class="ow">in</span> <span class="n">aliases</span><span class="p">:</span>
+            <span class="n">USER_DEFINED_ALIASES</span><span class="p">[</span><span class="n">alias</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="n">name</span></div>
+
+<span class="c1"># --- Multi-Octave Scale Construction Tools ---</span>
+
+<div class="viewcode-block" id="build_multi_octave_scale_from_tetrachords">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.build_multi_octave_scale_from_tetrachords">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_multi_octave_scale_from_tetrachords</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tetrachords</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Scale</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs a multi-octave scale from a list of tetrachords.</span>
+<span class="sd">    Each tetrachord is a 4-note group (e.g. [0, 2, 4, 5]).</span>
+<span class="sd">    All pitch classes are flattened into one merged scale.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pitch_classes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tet</span> <span class="ow">in</span> <span class="n">tetrachords</span><span class="p">:</span>
+        <span class="n">pitch_classes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">tet</span><span class="p">)</span>
+    <span class="n">unique_pcs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_classes</span><span class="p">))</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">unique_pcs</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;multi-octave&quot;</span><span class="p">,</span> <span class="n">multi_octave</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">USER_DEFINED_SCALES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span>
+    <span class="k">return</span> <span class="n">scale</span></div>
+
+
+
+<div class="viewcode-block" id="build_composite_scale">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.build_composite_scale">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_composite_scale</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scale_a</span><span class="p">:</span> <span class="n">Scale</span><span class="p">,</span> <span class="n">scale_b</span><span class="p">:</span> <span class="n">Scale</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Scale</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructs a multi-octave scale by merging two one-octave scales</span>
+<span class="sd">    assumed to share a tonic. Duplicate tones are eliminated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">combined_pcs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">scale_a</span><span class="o">.</span><span class="n">pitch_classes</span> <span class="o">+</span> <span class="n">scale_b</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">))</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">Scale</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">combined_pcs</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="s2">&quot;multi-octave&quot;</span><span class="p">,</span> <span class="n">multi_octave</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">USER_DEFINED_SCALES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">scale</span>
+    <span class="k">return</span> <span class="n">scale</span></div>
+
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tuple</span>
+
+<span class="c1"># --- Tritone Detection Utility ---</span>
+
+<div class="viewcode-block" id="has_tritone">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.has_tritone">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">has_tritone</span><span class="p">(</span><span class="n">pitch_classes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if any interval between two notes is a tritone (6 semitones).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pcs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_classes</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">combinations</span><span class="p">(</span><span class="n">pcs</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">((</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<span class="c1"># --- Chord Construction ---</span>
+
+<div class="viewcode-block" id="build_chord_from_degree">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.build_chord_from_degree">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">build_chord_from_degree</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">extension</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Build a chord of given extension (3, 4, or 5 notes) from a scale degree.</span>
+<span class="sd">    - 3 = triad (1–3–5)</span>
+<span class="sd">    - 4 = seventh chord (1–3–5–7)</span>
+<span class="sd">    - 5 = ninth chord (1–3–5–7–9)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">intervals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">][:</span><span class="n">extension</span><span class="p">]</span>  <span class="c1"># scale degrees offsets</span>
+    <span class="n">chord</span> <span class="o">=</span> <span class="p">[</span><span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">mode</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">cardinality</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">chord</span></div>
+
+
+
+<span class="c1"># --- Diatonic Modal Chord Suggestion (Persichetti Logic) ---</span>
+
+<div class="viewcode-block" id="suggest_modal_chords_diatonic">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.suggest_modal_chords_diatonic">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">suggest_modal_chords_diatonic</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Suggests triads, 7th chords, and 9th chords from a diatonic mode.</span>
+<span class="sd">    Flags chords containing a tritone, which Persichetti advises against in modal contexts.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of (label, pitch class list, safety marker)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">as_mode_of</span> <span class="o">!=</span> <span class="s2">&quot;Diatonic&quot;</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;This function only supports diatonic modes.&quot;</span><span class="p">)</span>
+
+    <span class="n">suggestions</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mode</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">cardinality</span><span class="p">):</span>
+        <span class="n">roman</span> <span class="o">=</span> <span class="n">degree_to_roman</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">degree</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">for</span> <span class="n">ext</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]:</span>  <span class="c1"># triads, 7ths, 9ths</span>
+            <span class="n">chord</span> <span class="o">=</span> <span class="n">build_chord_from_degree</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">ext</span><span class="p">)</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">roman</span><span class="si">}{</span><span class="s1">&#39;7&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;9&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">has_tritone</span><span class="p">(</span><span class="n">chord</span><span class="p">):</span>
+                <span class="n">suggestions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="n">chord</span><span class="p">,</span> <span class="s2">&quot;⚠️ contains tritone&quot;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">suggestions</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">label</span><span class="p">,</span> <span class="n">chord</span><span class="p">,</span> <span class="s2">&quot;✅ modal-safe&quot;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">suggestions</span></div>
+
+
+<span class="c1"># --- Modal Brightness Utility (Diatonic System Only) ---</span>
+
+<span class="n">DIATONIC_BRIGHTNESS_SCALE</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Locrian&quot;</span><span class="p">:</span>    <span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;Phrygian&quot;</span><span class="p">:</span>   <span class="o">-</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;Aeolian&quot;</span><span class="p">:</span>    <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;Dorian&quot;</span><span class="p">:</span>      <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;Mixolydian&quot;</span><span class="p">:</span> <span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;Ionian&quot;</span><span class="p">:</span>     <span class="o">+</span><span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;Lydian&quot;</span><span class="p">:</span>     <span class="o">+</span><span class="mi">3</span>
+<span class="p">}</span>
+
+<div class="viewcode-block" id="modal_brightness">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.modal_brightness">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">modal_brightness</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a relative brightness index for a Diatonic mode.</span>
+<span class="sd">    -3 = darkest (Locrian)</span>
+<span class="sd">    +3 = brightest (Lydian)</span>
+<span class="sd">    Returns None if the mode is not part of the Diatonic system.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">DIATONIC_MODES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">tonic</span> <span class="o">==</span> <span class="n">mode</span><span class="o">.</span><span class="n">tonic</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">DIATONIC_BRIGHTNESS_SCALE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="c1"># --- Chromatic Alteration of Diminished Triads (Diatonic Modes Only) ---</span>
+
+<div class="viewcode-block" id="suggest_diminished_alterations">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.suggest_diminished_alterations">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">suggest_diminished_alterations</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a diatonic mode, identifies the diminished triad and suggests chromatic alterations</span>
+<span class="sd">    that stabilize the tritone (either by raising the fifth or lowering the root).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary with the original triad and its chromatic variants.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">DIATONIC_MODES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">tonic</span> <span class="o">==</span> <span class="n">mode</span><span class="o">.</span><span class="n">tonic</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span> <span class="ow">or</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DIATONIC_TRIADIC_HIERARCHIES</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Not a supported diatonic mode</span>
+
+    <span class="n">diminished_roman</span> <span class="o">=</span> <span class="n">DIATONIC_TRIADIC_HIERARCHIES</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;diminished&quot;</span><span class="p">)</span>
+    <span class="n">degree</span> <span class="o">=</span> <span class="n">roman_to_degree</span><span class="p">(</span><span class="n">diminished_roman</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">degree</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Build original diminished triad</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+    <span class="n">third</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">fifth</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">((</span><span class="n">degree</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span> <span class="o">%</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">original</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">]</span>
+
+    <span class="c1"># Alteration 1: raise the 5th (augmented fifth = major triad or dom7 base)</span>
+    <span class="n">raised_fifth</span> <span class="o">=</span> <span class="p">(</span><span class="n">fifth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+    <span class="n">alt1</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">root</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">raised_fifth</span><span class="p">])</span>
+
+    <span class="c1"># Alteration 2: lower the root (stabilizes 5th to a perfect 5th)</span>
+    <span class="n">lowered_root</span> <span class="o">=</span> <span class="p">(</span><span class="n">root</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span>
+    <span class="n">alt2</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">lowered_root</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">&quot;original_diminished&quot;</span><span class="p">:</span> <span class="n">original</span><span class="p">,</span>
+        <span class="s2">&quot;alteration_raise_5th&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;chord&quot;</span><span class="p">:</span> <span class="n">alt1</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Raises diminished 5th → stabilizes to major/minor triad or dominant variant&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;alteration_lower_root&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;chord&quot;</span><span class="p">:</span> <span class="n">alt2</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Lowers root → forms new dominant-function triad&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># --- Locrian Tonic Voicing Suggestions (Avoiding Tritone) ---</span>
+
+<div class="viewcode-block" id="locrian_tonic_voicing_suggestions">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.locrian_tonic_voicing_suggestions">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">locrian_tonic_voicing_suggestions</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides voicing alternatives for the Locrian tonic chord</span>
+<span class="sd">    to avoid emphasizing the tritone.</span>
+
+<span class="sd">    Suggestions include:</span>
+<span class="sd">    - Omission of the fifth</span>
+<span class="sd">    - Omission of third and fifth (unison/octave effect)</span>
+<span class="sd">    - First inversion (3rd in the bass)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">DIATONIC_MODES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">tonic</span> <span class="o">==</span> <span class="n">mode</span><span class="o">.</span><span class="n">tonic</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;Locrian&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">root</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">third</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">fifth</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">diminished_triad</span> <span class="o">=</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="n">third</span><span class="p">,</span> <span class="n">fifth</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;Locrian&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tonic_diminished_triad&quot;</span><span class="p">:</span> <span class="n">diminished_triad</span><span class="p">,</span>
+        <span class="s2">&quot;suggestion_omit_5th&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;voicing&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">root</span><span class="p">,</span> <span class="n">third</span><span class="p">],</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Removes tritone between root and diminished fifth&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;suggestion_omit_3rd_and_5th&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;voicing&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">root</span><span class="p">],</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Tonic stated in unison or octave only — no tritone present&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;suggestion_first_inversion&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;voicing&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">third</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">fifth</span><span class="p">],</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Tritone effect is subdued by placing 3rd in the bass&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># --- Locrian Tritone as Thematic Element ---</span>
+
+<div class="viewcode-block" id="locrian_tritone_themes">
+<a class="viewcode-back" href="../../../persichetti.core.scales.html#persichetti.core.scales.locrian_tritone_themes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">locrian_tritone_themes</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ModalSystem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given a Locrian mode, suggest melodic and harmonic patterns that emphasize the </span>
+<span class="sd">    tritone relationship between the tonic (I) and the fifth scale step (V).</span>
+
+<span class="sd">    This highlights the use of the diminished fifth and its thematic potential in Locrian.</span>
+<span class="sd">    Returns suggestions for melodic emphasis of the tritone.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">DIATONIC_MODES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">tonic</span> <span class="o">==</span> <span class="n">mode</span><span class="o">.</span><span class="n">tonic</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;Locrian&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># Only works for Locrian mode</span>
+
+    <span class="c1"># Get the tonic and fifth scale degree</span>
+    <span class="n">tonic</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">fifth</span> <span class="o">=</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    
+    <span class="c1"># Melodic pattern 1: Emphasize the tritone between tonic and fifth (in unison/octave)</span>
+    <span class="n">tritone_melodic</span> <span class="o">=</span> <span class="p">[</span><span class="n">tonic</span><span class="p">,</span> <span class="n">fifth</span><span class="p">]</span>
+
+    <span class="c1"># Melodic pattern 2: Use tonic and dominant 7th (tritone relationship still present)</span>
+    <span class="n">dominant_7th</span> <span class="o">=</span> <span class="p">[</span><span class="n">tonic</span><span class="p">,</span> <span class="n">fifth</span><span class="p">,</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">mode</span><span class="o">.</span><span class="n">degree_to_pc</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>  <span class="c1"># Tonic, 5th, b7</span>
+
+    <span class="c1"># Melodic pattern 3: Use both tonic and fifth in unison (obliterates tritone tension)</span>
+    <span class="n">unison_tonic_fifth</span> <span class="o">=</span> <span class="p">[</span><span class="n">tonic</span><span class="p">,</span> <span class="n">tonic</span><span class="p">]</span>  <span class="c1"># Tonic and octave</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;Locrian&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tritone_melodic&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;pattern&quot;</span><span class="p">:</span> <span class="n">tritone_melodic</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Melodic use of tonic and fifth, highlighting the tritone.&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;dominant_7th_melodic&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;pattern&quot;</span><span class="p">:</span> <span class="n">dominant_7th</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Dominant 7th with tonic and fifth, keeping tritone tension intact.&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;unison_tonic_fifth&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;pattern&quot;</span><span class="p">:</span> <span class="n">unison_tonic_fifth</span><span class="p">,</span>
+            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Tonic repeated in unison, removing tritone tension.&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

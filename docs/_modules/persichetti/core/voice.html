@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.core.voice &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Code Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">persichetti.core.voice</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for persichetti.core.voice</h1><div class="highlight"><pre>
+<span></span><span class="c1"># voice.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.quantum_time</span><span class="w"> </span><span class="kn">import</span> <span class="n">MusicalInertialFrame</span>
+
+
+<div class="viewcode-block" id="Voice">
+<a class="viewcode-back" href="../../../persichetti.core.voice.html#persichetti.core.voice.Voice">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Voice</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a single voice in the score, capable of being monophonic or polyphonic.</span>
+<span class="sd">    Each voice is associated with a specific Musical Inertial Frame (MIF) for timing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mif_handle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a voice with a name, mode, and a default or provided MIF handle.</span>
+<span class="sd">        </span>
+<span class="sd">        :param name: The name of the voice.</span>
+<span class="sd">        :param mode: The mode (e.g., &#39;Ionian&#39;, &#39;Dorian&#39;) of the voice.</span>
+<span class="sd">        :param mif_handle: The handle for the MIF this voice will use (default is &#39;default&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mif_handle</span> <span class="o">=</span> <span class="n">mif_handle</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mif</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># MIF will be assigned later</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># A list to store all events (motifs) for this voice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Placeholder for instrument assignment (optional)</span>
+
+<div class="viewcode-block" id="Voice.assign_mif">
+<a class="viewcode-back" href="../../../persichetti.core.voice.html#persichetti.core.voice.Voice.assign_mif">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">assign_mif</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mif_handle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mif_registry</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign a Musical Inertial Frame (MIF) to this voice based on its mif_handle.</span>
+<span class="sd">        If the MIF doesn&#39;t exist, create a new one.</span>
+
+<span class="sd">        :param mif_handle: The handle to identify the MIF (e.g., &#39;default&#39;).</span>
+<span class="sd">        :param mif_registry: The registry of all MIFs in the score, mapped by their handle.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mif_handle</span> <span class="ow">in</span> <span class="n">mif_registry</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mif</span> <span class="o">=</span> <span class="n">mif_registry</span><span class="p">[</span><span class="n">mif_handle</span><span class="p">]</span>  <span class="c1"># Use the existing MIF</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Create a new MIF if it doesn&#39;t exist</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mif</span> <span class="o">=</span> <span class="n">MusicalInertialFrame</span><span class="p">(</span><span class="n">tempo_function</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">start_time</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">mif_registry</span><span class="p">[</span><span class="n">mif_handle</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mif</span>  <span class="c1"># Store it in the registry</span></div>
+
+
+<div class="viewcode-block" id="Voice.add_event">
+<a class="viewcode-back" href="../../../persichetti.core.voice.html#persichetti.core.voice.Voice.add_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motif</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a melodic or harmonic motif to the voice&#39;s event list.</span>
+
+<span class="sd">        :param motif: The motif to be added (either MelodicMotif or HarmonicMotif).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Voice.remove_event">
+<a class="viewcode-back" href="../../../persichetti.core.voice.html#persichetti.core.voice.Voice.remove_event">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">motif</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove a motif from the voice&#39;s event list.</span>
+
+<span class="sd">        :param motif: The motif to be removed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">motif</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Voice.set_instrument">
+<a class="viewcode-back" href="../../../persichetti.core.voice.html#persichetti.core.voice.Voice.set_instrument">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_instrument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instrument</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Optionally set an instrument for this voice (if applicable).</span>
+<span class="sd">        </span>
+<span class="sd">        :param instrument: The instrument to be assigned to this voice.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument</span> <span class="o">=</span> <span class="n">instrument</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Voice(name=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, mode=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">, mif_handle=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mif_handle</span><span class="si">}</span><span class="s2">, events=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">events</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
