@@ -1,1 +1,0 @@
-# Placeholder for motif classes and transformations

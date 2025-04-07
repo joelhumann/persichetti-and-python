@@ -8,7 +8,7 @@ the provided scale/mode/user-defined set and the tonicity flag.
 """
 
 from typing import Union, List, Optional, Set
-from core.scales import Scale, ModalSystem
+from persichetti.core.scales import Scale, ModalSystem
 
 
 class PitchContext:

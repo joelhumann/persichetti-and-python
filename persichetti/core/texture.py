@@ -1,6 +1,6 @@
 from collections import Counter
-from intervals import Interval
-from pitch import Pitch, PitchClass
+from persichetti.core.intervals import Interval
+from persichetti.core.pitch import Pitch, PitchClass
 from itertools import combinations
 
 class ChordTexture:
@@ -70,7 +70,7 @@ class ChordTexture:
         print("Clarity score (lower is clearer):", self.clarity_score())
         print("Spacing pattern (bottom to top):", self.spacing_pattern())
 
-      from collections import Counter
+from collections import Counter
 from pitch import Pitch
 
 def amplify_existing_overtones(chord, partials=8, tolerance_cents=25):

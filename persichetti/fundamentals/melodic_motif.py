@@ -1,8 +1,8 @@
 # fundamentals/melodic_motif.py
 
 from typing import List, Optional
-from fundamentals.event import Element, Note, Rest
-from fundamentals.pitch_context import PitchContext
+from .event import Element, Note, Rest
+from .pitch_context import PitchContext
 
 
 class MelodicMotif:

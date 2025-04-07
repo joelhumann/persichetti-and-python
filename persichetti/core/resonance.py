@@ -1,7 +1,7 @@
 # resonance.py
 
 from collections import defaultdict, Counter
-from pitch import Pitch
+from persichetti.core.pitch import Pitch
 from intervals import Interval
 from itertools import combinations
 import math
