@@ -1,1 +1,0 @@
-# Placeholder for modal center detection

@@ -1,1 +1,0 @@
-# Placeholder for golden ratio tuning, adaptive systems, psychoacoustic models
