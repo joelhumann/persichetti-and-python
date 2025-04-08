@@ -1,5 +1,5 @@
 import pytest
-from fundamentals.event import Note, Rest
+from persichetti.fundamentals.event import Note, Rest
 
 
 def test_note_pitched_and_copy():

@@ -9,8 +9,12 @@ Submodules
 
    persichetti.fundamentals.event
    persichetti.fundamentals.melodic_motif
+   persichetti.fundamentals.motif_to_pseudocode
+   persichetti.fundamentals.pitch
    persichetti.fundamentals.pitch_context
-   persichetti.fundamentals.time
+   persichetti.fundamentals.pseudocode_to_motif
+   persichetti.fundamentals.quantum_time
+   persichetti.fundamentals.resolver
 
 Module contents
 ---------------

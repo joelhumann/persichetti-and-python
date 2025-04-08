@@ -25,4 +25,4 @@ html_theme_options = {
     'navigation_depth': 4,
 }
 
-exclude_patterns = ['**/setup.py']
+exclude_patterns = ['../setup.py']

@@ -91,8 +91,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persichetti-core-resonance-module">
-<h1>persichetti.core.resonance module<a class="headerlink" href="#persichetti-core-resonance-module" title="Link to this heading"></a></h1>
+  <section id="module-persichetti.core.resonance">
+<span id="persichetti-core-resonance-module"></span><h1>persichetti.core.resonance module<a class="headerlink" href="#module-persichetti.core.resonance" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.resonance.OvertoneSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.resonance.</span></span><span class="sig-name descname"><span class="pre">OvertoneSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">110.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_partials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#OvertoneSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.OvertoneSeries" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Generates the first N overtones of a fundamental frequency.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.resonance.OvertoneSeries.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#OvertoneSeries.display"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.OvertoneSeries.display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.resonance.amplify_existing_overtones">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.resonance.</span></span><span class="sig-name descname"><span class="pre">amplify_existing_overtones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance_cents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#amplify_existing_overtones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.amplify_existing_overtones" title="Link to this definition"></a></dt>
+<dd><p>Suggests pitches that reinforce overlapping overtones in the chord.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Each dict has the following keys:</p>
+<ul class="simple">
+<li><p>’pitch’: Pitch object</p></li>
+<li><p>’reinforced_by’: list of (source_pitch, harmonic_number)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.resonance.brilliance_score">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.resonance.</span></span><span class="sig-name descname"><span class="pre">brilliance_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#brilliance_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.brilliance_score" title="Link to this definition"></a></dt>
+<dd><p>Returns a score for how well a chord’s intervals align with overtone spacing.
+Higher score = more ‘brilliant’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.resonance.resonance_profile">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.resonance.</span></span><span class="sig-name descname"><span class="pre">resonance_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#resonance_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.resonance_profile" title="Link to this definition"></a></dt>
+<dd><p>Prints a musical profile of the chord’s resonance qualities.
+Includes:
+- Brilliance score
+- Suggested resonance supports
+- Suggested reinforcement tones with overtone sources</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.resonance.suggest_supporting_tones">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.resonance.</span></span><span class="sig-name descname"><span class="pre">suggest_supporting_tones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bass_pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persichetti.fundamentals.pitch.html#persichetti.fundamentals.pitch.Pitch" title="persichetti.fundamentals.pitch.Pitch"><span class="pre">Pitch</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/resonance.html#suggest_supporting_tones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.resonance.suggest_supporting_tones" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of pitches that lie a fifth and a ninth below the given pitch.
+These help reinforce overtone resonance.</p>
+</dd></dl>
+
 </section>
 
 

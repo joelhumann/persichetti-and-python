@@ -91,8 +91,103 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persichetti-core-intervals-module">
-<h1>persichetti.core.intervals module<a class="headerlink" href="#persichetti-core-intervals-module" title="Link to this heading"></a></h1>
+  <section id="module-persichetti.core.intervals">
+<span id="persichetti-core-intervals-module"></span><h1>persichetti.core.intervals module<a class="headerlink" href="#module-persichetti.core.intervals" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Chord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.intervals.</span></span><span class="sig-name descname"><span class="pre">Chord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persichetti.fundamentals.pitch.html#persichetti.fundamentals.pitch.Pitch" title="persichetti.fundamentals.pitch.Pitch"><span class="pre">Pitch</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Chord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Chord" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Chord.qualia_profile">
+<span class="sig-name descname"><span class="pre">qualia_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Chord.qualia_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Chord.qualia_profile" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Chord.resolve_all">
+<span class="sig-name descname"><span class="pre">resolve_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Chord.resolve_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Chord.resolve_all" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.intervals.</span></span><span class="sig-name descname"><span class="pre">Interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">semitone_distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Interval" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.degrees_apart">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">degrees_apart</span></span><a class="headerlink" href="#persichetti.core.intervals.Interval.degrees_apart" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.invert">
+<span class="sig-name descname"><span class="pre">invert</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Interval.invert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Interval.invert" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.openness">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">openness</span></span><a class="headerlink" href="#persichetti.core.intervals.Interval.openness" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Interval.resolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Interval.resolve" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.spaced_qualia">
+<span class="sig-name descname"><span class="pre">spaced_qualia</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Interval.spaced_qualia"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Interval.spaced_qualia" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Interval.tension_rank">
+<span class="sig-name descname"><span class="pre">tension_rank</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">custom_rank</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Interval.tension_rank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Interval.tension_rank" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.intervals.TexturalClass">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.intervals.</span></span><span class="sig-name descname"><span class="pre">TexturalClass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#TexturalClass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.TexturalClass" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.TexturalClass.is_ambiguous">
+<span class="sig-name descname"><span class="pre">is_ambiguous</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#TexturalClass.is_ambiguous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.TexturalClass.is_ambiguous" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.TexturalClass.is_consonant">
+<span class="sig-name descname"><span class="pre">is_consonant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#TexturalClass.is_consonant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.TexturalClass.is_consonant" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.TexturalClass.is_dissonant">
+<span class="sig-name descname"><span class="pre">is_dissonant</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#TexturalClass.is_dissonant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.TexturalClass.is_dissonant" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.TexturalClass.resolve">
+<span class="sig-name descname"><span class="pre">resolve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#TexturalClass.resolve"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.TexturalClass.resolve" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Trichord">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.intervals.</span></span><span class="sig-name descname"><span class="pre">Trichord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitches</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persichetti.fundamentals.pitch.html#persichetti.fundamentals.pitch.Pitch" title="persichetti.fundamentals.pitch.Pitch"><span class="pre">Pitch</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Trichord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Trichord" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#persichetti.core.intervals.Chord" title="persichetti.core.intervals.Chord"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chord</span></code></a></p>
+<p>Specialized class for 3-note chords with Persichetti-style classification.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.intervals.Trichord.classify_trichord">
+<span class="sig-name descname"><span class="pre">classify_trichord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#Trichord.classify_trichord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.Trichord.classify_trichord" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.intervals.modify_qualia_for_spacing">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.intervals.</span></span><span class="sig-name descname"><span class="pre">modify_qualia_for_spacing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_qualia</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">openness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/intervals.html#modify_qualia_for_spacing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.intervals.modify_qualia_for_spacing" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
 
 

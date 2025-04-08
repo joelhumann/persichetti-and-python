@@ -1,15 +1,10 @@
-# fundamentals/quantum_time.py
-
-"""
-Philosophical and computational model of musical time based on the Persichetti and Python Project.
-Supports absolute clock time, local musical inertial frames, tempo functions, and computation of
-the Fundamental Quantum of Musical Time (FQMT).
-"""
+# persichetti/fundamentals/quantum_time.py
 
 from decimal import Decimal
 from fractions import Fraction
 from functools import reduce
 from math import lcm
+from typing import Union, Callable
 
 
 class ClockTime:
@@ -19,6 +14,8 @@ class ClockTime:
     Attributes:
         seconds (Decimal): The time value in seconds.
     """
+    seconds: Decimal
+
     def __init__(self, seconds):
         self.seconds = Decimal(seconds)
 
@@ -39,6 +36,8 @@ class ClockDuration:
     Attributes:
         seconds (Decimal): Duration in seconds.
     """
+    seconds: Decimal
+
     def __init__(self, seconds):
         self.seconds = Decimal(seconds)
 
@@ -56,11 +55,10 @@ class TempoFunction:
     Attributes:
         bpm (Decimal): Beats per minute.
         seconds_per_beat (Decimal): Duration of one beat in seconds.
-
-    Methods:
-        beats_to_seconds(beats): Converts a number of beats to seconds.
-        seconds_to_beats(seconds): Converts seconds to number of beats.
     """
+    bpm: Decimal
+    seconds_per_beat: Decimal
+
     def __init__(self, bpm=60):
         self.bpm = Decimal(bpm)
         self.seconds_per_beat = Decimal(60) / self.bpm
@@ -82,11 +80,10 @@ class MusicalInertialFrame:
     Attributes:
         tempo_function (TempoFunction): Governs the beat-to-clock mapping.
         start_time (ClockTime): The starting time of the frame in ClockTime.
-
-    Methods:
-        beat_to_clock_time(beat_number): Converts a beat number to ClockTime.
-        clock_time_to_beat(clock_time): Converts a ClockTime to local beat number.
     """
+    tempo_function: TempoFunction
+    start_time: ClockTime
+
     def __init__(self, tempo_function: TempoFunction, start_time: ClockTime):
         self.tempo_function = tempo_function
         self.start_time = start_time
@@ -109,32 +106,17 @@ class FQMTResolver:
 
     Attributes:
         frames (list of Fraction): List of smallest unit durations (in seconds) per MIF.
-
-    Methods:
-        add_frame(mif, smallest_unit_in_beats): Adds a frame with its smallest pulse unit.
-        compute_fqmt(): Computes the least common multiple of all unit durations.
     """
+    frames: list
+
     def __init__(self):
         self.frames = []
 
     def add_frame(self, mif: MusicalInertialFrame, smallest_unit_in_beats: Fraction):
-        """
-        Adds a musical frame and its smallest unit (in beats).
-
-        Args:
-            mif (MusicalInertialFrame): The frame to include.
-            smallest_unit_in_beats (Fraction): The smallest unit of meter in beats (e.g., 1/8).
-        """
         duration_in_seconds = smallest_unit_in_beats * Decimal(mif.tempo_function.seconds_per_beat)
         self.frames.append(Fraction(duration_in_seconds))
 
     def compute_fqmt(self):
-        """
-        Computes the Fundamental Quantum of Musical Time (FQMT) in seconds as a Fraction.
-
-        Returns:
-            Fraction: The smallest quantum of time that resolves all metrical frames.
-        """
         if not self.frames:
             raise ValueError("No frames added to FQMTResolver.")
         denominators = [duration.limit_denominator().denominator for duration in self.frames]
@@ -151,27 +133,17 @@ class TimeMapping:
     Maps the Fundamental Quantum of Musical Time (FQMT) to real ClockTime.
 
     Attributes:
-        fqmt (Fraction): The quantum unit in musical time (e.g., 1/144 of a whole note).
-        seconds_per_fqmt (Decimal or callable): Duration of one FQMT in seconds or a time-varying function.
-
-    Methods:
-        musical_to_clock(tick_index): Converts a tick index to absolute ClockTime.
-        set_tempo(bpm_for_unit): Sets a fixed metronomic speed for the FQMT.
+        fqmt (Fraction): The quantum unit in musical time.
+        seconds_per_fqmt (Decimal or callable): Duration of one FQMT in seconds or a function.
     """
+    fqmt: Fraction
+    seconds_per_fqmt: Union[Decimal, Callable[[int], Decimal]]
+
     def __init__(self, fqmt: Fraction, seconds_per_fqmt):
         self.fqmt = fqmt
-        self.seconds_per_fqmt = seconds_per_fqmt  # Can be Decimal or function
+        self.seconds_per_fqmt = seconds_per_fqmt
 
     def musical_to_clock(self, tick_index: int) -> ClockTime:
-        """
-        Maps a musical tick (multiple of FQMT) to absolute ClockTime.
-
-        Args:
-            tick_index (int): The index of the musical quantum.
-
-        Returns:
-            ClockTime: The mapped ClockTime.
-        """
         if callable(self.seconds_per_fqmt):
             seconds = sum(self.seconds_per_fqmt(i) for i in range(tick_index))
         else:
@@ -179,14 +151,9 @@ class TimeMapping:
         return ClockTime(seconds)
 
     def set_tempo(self, bpm_for_unit: Fraction):
-        """
-        Set the duration of each FQMT unit based on a desired tempo.
-
-        Args:
-            bpm_for_unit (Fraction): The number of FQMTs per minute.
-        """
         seconds = Decimal(60) / Decimal(bpm_for_unit)
         self.seconds_per_fqmt = seconds
+
 
 class TimeContext:
     """
@@ -195,22 +162,14 @@ class TimeContext:
     Attributes:
         base_note (int): The note value that represents one quantum (e.g., 64 = 1/64 note).
     """
+    base_note: int
+
     def __init__(self, base_note: int = 64):
         if base_note not in [1, 2, 4, 8, 16, 32, 64, 128]:
             raise ValueError("Use a standard LilyPond duration as base_note (e.g., 4, 8, 16, 32, 64).")
         self.base_note = base_note
 
     def quanta_to_lilypond(self, quanta: int) -> str:
-        """
-        Converts a number of quanta into a valid LilyPond duration string.
-        Assumes each quantum is equal to 1/self.base_note note.
-
-        Args:
-            quanta (int): Number of quantum units.
-
-        Returns:
-            str: LilyPond duration string (e.g., '4', '8.', '16..')
-        """
         duration = Fraction(quanta, 1) * Fraction(1, self.base_note)
         return self._fraction_to_lilypond(duration)
 
@@ -234,3 +193,4 @@ class TimeContext:
         if dots > 0:
             lily += "." * dots
         return lily
+

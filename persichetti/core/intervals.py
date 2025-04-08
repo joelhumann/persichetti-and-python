@@ -141,7 +141,7 @@ class Interval:
         return f"Interval({self.spacing}) = {self.type}, {self.qualia}, {self.openness}"
 
 from itertools import combinations
-from persichetti.core.pitch import Pitch
+from persichetti.fundamentals.pitch import Pitch
 
 class Chord:
     def __init__(self, pitches: list[Pitch]):

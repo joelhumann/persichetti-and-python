@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="persichetti.fundamentals.time module" href="persichetti.fundamentals.time.html" />
-    <link rel="prev" title="persichetti.fundamentals.melodic_motif module" href="persichetti.fundamentals.melodic_motif.html" /> 
+    <link rel="next" title="persichetti.fundamentals.pseudocode_to_motif module" href="persichetti.fundamentals.pseudocode_to_motif.html" />
+    <link rel="prev" title="persichetti.fundamentals.pitch module" href="persichetti.fundamentals.pitch.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -91,16 +91,50 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persichetti-fundamentals-pitch-context-module">
-<h1>persichetti.fundamentals.pitch_context module<a class="headerlink" href="#persichetti-fundamentals-pitch-context-module" title="Link to this heading"></a></h1>
+  <section id="module-persichetti.fundamentals.pitch_context">
+<span id="persichetti-fundamentals-pitch-context-module"></span><h1>persichetti.fundamentals.pitch_context module<a class="headerlink" href="#module-persichetti.fundamentals.pitch_context" title="Link to this heading"></a></h1>
+<p>Defines the PitchContext class for validating pitch types in a musical passage.</p>
+<p>This class enforces which pitch classes (mod 12) are allowed, depending on
+the provided scale/mode/user-defined set and the tonicity flag.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.fundamentals.pitch_context.PitchContext">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.pitch_context.</span></span><span class="sig-name descname"><span class="pre">PitchContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitch_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persichetti.core.scales.html#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="persichetti.core.scales.html#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tonicity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/pitch_context.html#PitchContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.pitch_context.PitchContext" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.pitch_context.PitchContext.get_reference">
+<span class="sig-name descname"><span class="pre">get_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/pitch_context.html#PitchContext.get_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.pitch_context.PitchContext.get_reference" title="Link to this definition"></a></dt>
+<dd><p>Returns the reference pitch (the pitch considered ‘0’).</p>
+<ul class="simple">
+<li><p>If tonicity is True, returns 0 (tonic is 0).</p></li>
+<li><dl class="simple">
+<dt>If tonicity is False, returns:</dt><dd><ul>
+<li><p>reference_pitch (if provided during initialization), or</p></li>
+<li><p>first_pitch (if passed in at runtime), or</p></li>
+<li><p>raises ValueError if neither is available.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.pitch_context.PitchContext.is_allowed">
+<span class="sig-name descname"><span class="pre">is_allowed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/pitch_context.html#PitchContext.is_allowed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.pitch_context.PitchContext.is_allowed" title="Link to this definition"></a></dt>
+<dd><p>Check whether the given pitch (as integer) is allowed in this context.
+Validity is based on %12 membership in the pitch_set.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="persichetti.fundamentals.melodic_motif.html" class="btn btn-neutral float-left" title="persichetti.fundamentals.melodic_motif module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="persichetti.fundamentals.time.html" class="btn btn-neutral float-right" title="persichetti.fundamentals.time module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="persichetti.fundamentals.pitch.html" class="btn btn-neutral float-left" title="persichetti.fundamentals.pitch module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="persichetti.fundamentals.pseudocode_to_motif.html" class="btn btn-neutral float-right" title="persichetti.fundamentals.pseudocode_to_motif module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

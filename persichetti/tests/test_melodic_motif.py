@@ -1,8 +1,8 @@
 import pytest
-from fundamentals.event import Note, Rest
-from fundamentals.melodic_motif import MelodicMotif
-from fundamentals.pitch_context import PitchContext
-from core.scales import DIATONIC_MODES
+from persichetti.fundamentals.event import Note, Rest
+from persichetti.fundamentals.melodic_motif import MelodicMotif
+from persichetti.fundamentals.pitch_context import PitchContext
+from persichetti.core.scales import DIATONIC_MODES
 
 @pytest.fixture
 def dorian_pitch_context():

@@ -1,4 +1,4 @@
-from core.scales import Scale, ModalSystem, DIATONIC_MODES
+from persichetti.core.scales import Scale, ModalSystem, DIATONIC_MODES
 
 
 def test_scale_properties():

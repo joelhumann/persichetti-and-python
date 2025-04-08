@@ -14,6 +14,7 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
 persichetti.analysis.contour.rst
 persichetti.analysis.formal_analysis.rst
 persichetti.analysis.harmonic_density.rst
@@ -78,7 +79,6 @@ persichetti.pedagogy.examples.13_harmonic_synthesis.rst
 persichetti.pedagogy.examples.rst
 persichetti.pedagogy.rst
 persichetti.rst
-persichetti.setup.rst
 persichetti.tests.rst
 persichetti.tests.test_event.rst
 persichetti.tests.test_melodic_motif.rst

@@ -1,8 +1,8 @@
 # resonance.py
 
 from collections import defaultdict, Counter
-from persichetti.core.pitch import Pitch
-from intervals import Interval
+from persichetti.fundamentals.pitch import Pitch
+from .intervals import Interval
 from itertools import combinations
 import math
 
@@ -59,12 +59,14 @@ def amplify_existing_overtones(chord, partials=8, tolerance_cents=25):
     """
     Suggests pitches that reinforce overlapping overtones in the chord.
 
-    Returns a list of dicts:
-        {
-            'pitch': Pitch object,
-            'reinforced_by': [(source_pitch, harmonic_number), ...]
-        }
+    Returns:
+        list of dict:
+            Each dict has the following keys:
+
+            - 'pitch': Pitch object
+            - 'reinforced_by': list of (source_pitch, harmonic_number)
     """
+
     overtone_hits = defaultdict(list)
     existing_indices = set(p.index for p in chord.pitches)
 

@@ -1,6 +1,6 @@
 from collections import Counter
-from persichetti.core.intervals import Interval
-from persichetti.core.pitch import Pitch, PitchClass
+from .intervals import Interval
+from persichetti.fundamentals.pitch import Pitch, PitchClass
 from itertools import combinations
 
 class ChordTexture:

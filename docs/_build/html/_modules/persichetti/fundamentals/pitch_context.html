@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.fundamentals.pitch_context &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">API:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">persichetti.fundamentals.pitch_context</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for persichetti.fundamentals.pitch_context</h1><div class="highlight"><pre>
+<span></span><span class="c1"># fundamentals/pitch_context.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Defines the PitchContext class for validating pitch types in a musical passage.</span>
+
+<span class="sd">This class enforces which pitch classes (mod 12) are allowed, depending on</span>
+<span class="sd">the provided scale/mode/user-defined set and the tonicity flag.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.core.scales</span><span class="w"> </span><span class="kn">import</span> <span class="n">Scale</span><span class="p">,</span> <span class="n">ModalSystem</span>
+
+
+<div class="viewcode-block" id="PitchContext">
+<a class="viewcode-back" href="../../../persichetti.fundamentals.pitch_context.html#persichetti.fundamentals.pitch_context.PitchContext">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PitchContext</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pitch_source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Scale</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">tonicity</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">reference_pitch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the pitch context.</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">        - pitch_source: defines the pitch-class environment.</span>
+<span class="sd">            • If ModalSystem → tonicized, 0 is the tonic.</span>
+<span class="sd">            • If Scale or List[int] → untonicized, 0 is just an element of the set.</span>
+<span class="sd">        - tonicity: True if operating in a modal or tonal space; False if atonal or unordered.</span>
+<span class="sd">        - reference_pitch: required only if tonicity is False and a runtime reference is needed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tonicity</span> <span class="o">=</span> <span class="n">tonicity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_pitch</span> <span class="o">=</span> <span class="n">reference_pitch</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch_source</span><span class="p">,</span> <span class="n">ModalSystem</span><span class="p">):</span>
+            <span class="c1"># Store modal logic explicitly</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">modal_system</span> <span class="o">=</span> <span class="n">pitch_source</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span> <span class="o">=</span> <span class="n">pitch_source</span><span class="o">.</span><span class="n">tonic</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">pitch_source</span><span class="o">.</span><span class="n">scale</span>
+            <span class="c1"># Rotate pitch classes so that modal tonic becomes pitch class 0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pitch_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">((</span><span class="n">pc</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonic</span><span class="p">)</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch_source</span><span class="p">,</span> <span class="n">Scale</span><span class="p">):</span>
+            <span class="c1"># A Scale is tonic-free — we take its pitch classes as-is</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pitch_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_source</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch_source</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="c1"># A user-defined list of pitch classes (can be raw semitones or mod 12)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pitch_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">pc</span> <span class="o">%</span> <span class="mi">12</span> <span class="k">for</span> <span class="n">pc</span> <span class="ow">in</span> <span class="n">pitch_source</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;pitch_source must be a ModalSystem, Scale, or list of integers.&quot;</span>
+            <span class="p">)</span>
+
+<div class="viewcode-block" id="PitchContext.is_allowed">
+<a class="viewcode-back" href="../../../persichetti.fundamentals.pitch_context.html#persichetti.fundamentals.pitch_context.PitchContext.is_allowed">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pitch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check whether the given pitch (as integer) is allowed in this context.</span>
+<span class="sd">        Validity is based on %12 membership in the pitch_set.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pc</span> <span class="o">=</span> <span class="n">pitch</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">return</span> <span class="n">pc</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_set</span></div>
+
+    
+<div class="viewcode-block" id="PitchContext.get_reference">
+<a class="viewcode-back" href="../../../persichetti.fundamentals.pitch_context.html#persichetti.fundamentals.pitch_context.PitchContext.get_reference">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first_pitch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the reference pitch (the pitch considered &#39;0&#39;).</span>
+
+<span class="sd">        - If tonicity is True, returns 0 (tonic is 0).</span>
+<span class="sd">        - If tonicity is False, returns:</span>
+<span class="sd">            • reference_pitch (if provided during initialization), or</span>
+<span class="sd">            • first_pitch (if passed in at runtime), or</span>
+<span class="sd">            • raises ValueError if neither is available.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonicity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_pitch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reference_pitch</span>
+        <span class="k">if</span> <span class="n">first_pitch</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">first_pitch</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Tonicity is False but no reference_pitch or first_pitch provided.&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">tonic_status</span> <span class="o">=</span> <span class="s2">&quot;True&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tonicity</span> <span class="k">else</span> <span class="s2">&quot;False&quot;</span>
+        <span class="n">pcs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_set</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;PitchContext tonic=</span><span class="si">{</span><span class="n">tonic_status</span><span class="si">}</span><span class="s2"> pitch_set=</span><span class="si">{</span><span class="n">pcs</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

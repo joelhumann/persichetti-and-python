@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="persichetti.fundamentals.pitch_context module" href="persichetti.fundamentals.pitch_context.html" />
+    <link rel="next" title="persichetti.fundamentals.motif_to_pseudocode module" href="persichetti.fundamentals.motif_to_pseudocode.html" />
     <link rel="prev" title="persichetti.fundamentals.event module" href="persichetti.fundamentals.event.html" /> 
 </head>
 
@@ -91,8 +91,51 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persichetti-fundamentals-melodic-motif-module">
-<h1>persichetti.fundamentals.melodic_motif module<a class="headerlink" href="#persichetti-fundamentals-melodic-motif-module" title="Link to this heading"></a></h1>
+  <section id="module-persichetti.fundamentals.melodic_motif">
+<span id="persichetti-fundamentals-melodic-motif-module"></span><h1>persichetti.fundamentals.melodic_motif module<a class="headerlink" href="#module-persichetti.fundamentals.melodic_motif" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.melodic_motif.</span></span><span class="sig-name descname"><span class="pre">MelodicMotif</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="persichetti.fundamentals.event.html#persichetti.fundamentals.event.Element" title="persichetti.fundamentals.event.Element"><span class="pre">Element</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch_context</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="persichetti.fundamentals.pitch_context.html#persichetti.fundamentals.pitch_context.PitchContext" title="persichetti.fundamentals.pitch_context.PitchContext"><span class="pre">PitchContext</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a monophonic sequence of musical elements (Notes and Rests).</p>
+<p>A MelodicMotif may be:
+- Free (no rhythmic duration): all elements must have duration=None.
+- Rhythmic (quantized in time): all elements must have an integer duration.</p>
+<p>A motif may include:
+- Pitched notes (with integer pitch values)
+- Unpitched notes (pitch=None)
+- Rests</p>
+<p>Pitched notes are interpreted in one of two ways:
+- With a PitchContext: validated against a pitch set (e.g., modal/tonal system)
+- Without a PitchContext: pitches are relative integers, normalized so the first pitched note is 0</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.fundamentals.melodic_motif.MelodicMotif" title="persichetti.fundamentals.melodic_motif.MelodicMotif"><span class="pre">MelodicMotif</span></a></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.copy" title="Link to this definition"></a></dt>
+<dd><p>Returns a deep copy of this MelodicMotif, including all elements.
+The pitch_context is shared (assumed immutable), but elements are copied.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitches">
+<span class="sig-name descname"><span class="pre">get_pitches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.get_pitches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitches" title="Link to this definition"></a></dt>
+<dd><p>Returns a list of pitch values for each element.
+Unpitched notes and rests return None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.is_free">
+<span class="sig-name descname"><span class="pre">is_free</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.is_free"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.is_free" title="Link to this definition"></a></dt>
+<dd><p>Returns True if the motif has no defined duration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic">
+<span class="sig-name descname"><span class="pre">is_rhythmic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.is_rhythmic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic" title="Link to this definition"></a></dt>
+<dd><p>Returns True if the motif has a defined total duration.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -100,7 +143,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="persichetti.fundamentals.event.html" class="btn btn-neutral float-left" title="persichetti.fundamentals.event module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="persichetti.fundamentals.pitch_context.html" class="btn btn-neutral float-right" title="persichetti.fundamentals.pitch_context module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="persichetti.fundamentals.motif_to_pseudocode.html" class="btn btn-neutral float-right" title="persichetti.fundamentals.motif_to_pseudocode module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
