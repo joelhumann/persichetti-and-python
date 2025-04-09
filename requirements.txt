@@ -5,3 +5,4 @@ abjad
 pytest
 flake8
 music21
+sphinx_rtd_theme
