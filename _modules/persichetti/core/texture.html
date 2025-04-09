@@ -1,0 +1,225 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.core.texture &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">persichetti.core.texture</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for persichetti.core.texture</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.intervals</span><span class="w"> </span><span class="kn">import</span> <span class="n">Interval</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.fundamentals.pitch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pitch</span><span class="p">,</span> <span class="n">PitchClass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">combinations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+
+<div class="viewcode-block" id="ChordTexture">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChordTexture</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Analyzes voicing and texture of a Chord.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">chord</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chord</span> <span class="o">=</span> <span class="n">chord</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitches</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">pitches</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pitch_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitches</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">intervals</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">intervals</span>
+
+<div class="viewcode-block" id="ChordTexture.doubling_profile">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.doubling_profile">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">doubling_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a dictionary of pitch class counts.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Counter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_classes</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ChordTexture.is_percussive">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.is_percussive">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_percussive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if all pitch classes are doubled (or more),</span>
+<span class="sd">        implying a percussive voicing style.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">profile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doubling_profile</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">profile</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="ChordTexture.interval_dominance">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.interval_dominance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interval_dominance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a frequency count of interval types in the chord.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">:</span>
+            <span class="n">type_counts</span><span class="p">[</span><span class="n">interval</span><span class="o">.</span><span class="n">type</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">type_counts</span></div>
+
+
+<div class="viewcode-block" id="ChordTexture.clarity_score">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.clarity_score">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clarity_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a heuristic &#39;cloudiness&#39; score:</span>
+<span class="sd">        lower = clearer, higher = more clustered.</span>
+<span class="sd">        Based on average interval spacing (in semitones).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">total_spacing</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">iv</span><span class="o">.</span><span class="n">spacing</span> <span class="k">for</span> <span class="n">iv</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">)</span>
+        <span class="n">average_spacing</span> <span class="o">=</span> <span class="n">total_spacing</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">intervals</span><span class="p">)</span>
+        <span class="c1"># Invert: higher spacing = lower cloudiness</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="mi">12</span> <span class="o">-</span> <span class="n">average_spacing</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 12 as arbitrary norm</span></div>
+
+
+<div class="viewcode-block" id="ChordTexture.spacing_pattern">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.spacing_pattern">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spacing_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a rough pattern of spacing from bottom to top.</span>
+<span class="sd">        Example: [&#39;wide&#39;, &#39;close&#39;, &#39;wide&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitches</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">spacing</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitches</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+            <span class="k">if</span> <span class="n">spacing</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;tight&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">spacing</span> <span class="o">&lt;=</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="n">pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;medium&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pattern</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;wide&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pattern</span></div>
+
+
+<div class="viewcode-block" id="ChordTexture.summary">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.ChordTexture.summary">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">pc</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">pitches</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Doubling profile:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">doubling_profile</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Percussive:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_percussive</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Interval dominance:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval_dominance</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clarity score (lower is clearer):&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clarity_score</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spacing pattern (bottom to top):&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing_pattern</span><span class="p">())</span></div>
+</div>
+
+
+<div class="viewcode-block" id="amplify_existing_overtones">
+<a class="viewcode-back" href="../../../persichetti.core.texture.html#persichetti.core.texture.amplify_existing_overtones">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">amplify_existing_overtones</span><span class="p">(</span><span class="n">chord</span><span class="p">,</span> <span class="n">partials</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">tolerance_cents</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Suggests additional pitches that would reinforce overlapping overtones in a chord.</span>
+
+<span class="sd">    Returns a list of Pitch objects (not already in the chord) that would strengthen resonance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">overtone_bins</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">()</span>
+    <span class="n">existing_indices</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">index</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">chord</span><span class="o">.</span><span class="n">pitches</span><span class="p">)</span>
+
+    <span class="c1"># Collect overtone bins (rounded to nearest semitone)</span>
+    <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="n">chord</span><span class="o">.</span><span class="n">pitches</span><span class="p">:</span>
+        <span class="n">base_freq</span> <span class="o">=</span> <span class="n">pitch</span><span class="o">.</span><span class="n">frequency</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">partials</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># skip fundamental</span>
+            <span class="n">overtone_freq</span> <span class="o">=</span> <span class="n">base_freq</span> <span class="o">*</span> <span class="n">n</span>
+            <span class="n">overtone_index</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mi">12</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">overtone_freq</span> <span class="o">/</span> <span class="mf">440.0</span><span class="p">))</span>  <span class="c1"># map to ET index</span>
+            <span class="n">overtone_bins</span><span class="p">[</span><span class="n">overtone_index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Only keep tones that appear as overtones of multiple chord tones</span>
+    <span class="n">suggested</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">overtone_bins</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">existing_indices</span><span class="p">:</span>
+            <span class="n">suggested</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Pitch</span><span class="p">(</span><span class="n">index</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">suggested</span></div>
+
+  
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

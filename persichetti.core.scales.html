@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.core.scales module &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="persichetti.core.texture module" href="persichetti.core.texture.html" />
+    <link rel="prev" title="persichetti.core.resonance module" href="persichetti.core.resonance.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">persichetti</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="persichetti.html">persichetti package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="persichetti.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="persichetti.analysis.html">persichetti.analysis package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="persichetti.branches.html">persichetti.branches package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="persichetti.core.html">persichetti.core package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="persichetti.fundamentals.html">persichetti.fundamentals package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="persichetti.tests.html">persichetti.tests package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="persichetti.tools.html">persichetti.tools package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="persichetti.utils.html">persichetti.utils package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="persichetti.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="persichetti.html#module-persichetti">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">persichetti</a></li>
+          <li class="breadcrumb-item"><a href="persichetti.html">persichetti package</a></li>
+          <li class="breadcrumb-item"><a href="persichetti.core.html">persichetti.core package</a></li>
+      <li class="breadcrumb-item active">persichetti.core.scales module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/persichetti.core.scales.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-persichetti.core.scales">
+<span id="persichetti-core-scales-module"></span><h1>persichetti.core.scales module<a class="headerlink" href="#module-persichetti.core.scales" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalSystem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">ModalSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">as_mode_of</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalSystem" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a mode: a specific tonicized realization of a scale.
+Also includes optional aliases and modal system membership.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalSystem.absolute_pitch_classes">
+<span class="sig-name descname"><span class="pre">absolute_pitch_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">set</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalSystem.absolute_pitch_classes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalSystem.absolute_pitch_classes" title="Link to this definition"></a></dt>
+<dd><p>Returns the set of absolute pitch classes for this mode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalSystem.degree_to_pc">
+<span class="sig-name descname"><span class="pre">degree_to_pc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalSystem.degree_to_pc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalSystem.degree_to_pc" title="Link to this definition"></a></dt>
+<dd><p>Convert a scale degree (0-indexed) to absolute pitch class.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalSystem.pc_to_degree">
+<span class="sig-name descname"><span class="pre">pc_to_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalSystem.pc_to_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalSystem.pc_to_degree" title="Link to this definition"></a></dt>
+<dd><p>Convert an absolute pitch class to degree within this mode.
+Returns None if not in scale.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalTransformer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">ModalTransformer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">modal_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalTransformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalTransformer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Enables modal interchange, modulation, and transformation across a collection of modal systems.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalTransformer.full_modal_transformation">
+<span class="sig-name descname"><span class="pre">full_modal_transformation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_mode_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalTransformer.full_modal_transformation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalTransformer.full_modal_transformation" title="Link to this definition"></a></dt>
+<dd><p>Optional mode and/or tonic change. Returns new ModalSystem or None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalTransformer.group_modal_systems_by_scale_type">
+<span class="sig-name descname"><span class="pre">group_modal_systems_by_scale_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">modal_dicts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalTransformer.group_modal_systems_by_scale_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalTransformer.group_modal_systems_by_scale_type" title="Link to this definition"></a></dt>
+<dd><p>Group ModalSystem instances by their parent scale type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalTransformer.modal_interchange">
+<span class="sig-name descname"><span class="pre">modal_interchange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_mode_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalTransformer.modal_interchange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalTransformer.modal_interchange" title="Link to this definition"></a></dt>
+<dd><p>Change mode name but preserve tonic. Returns new ModalSystem or None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.ModalTransformer.modal_modulation">
+<span class="sig-name descname"><span class="pre">modal_modulation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_tonic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#ModalTransformer.modal_modulation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.ModalTransformer.modal_modulation" title="Link to this definition"></a></dt>
+<dd><p>Change tonic while preserving mode identity.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.scales.Scale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">Scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_octave</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/scales.html#Scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.Scale" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a generic scale type by name and pitch-class content.
+Pitch classes are relative to a tonic (assumed to be 0).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.Scale.infer_category">
+<span class="sig-name descname"><span class="pre">infer_category</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#Scale.infer_category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.Scale.infer_category" title="Link to this definition"></a></dt>
+<dd><p>Infer the category based on the number of pitch classes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.scales.Scale.infer_symmetry">
+<span class="sig-name descname"><span class="pre">infer_symmetry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#Scale.infer_symmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.Scale.infer_symmetry" title="Link to this definition"></a></dt>
+<dd><p>Determines if the pitch class set is rotationally symmetric.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="persichetti.core.scales.USER_DEFINED_ALIASES">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">USER_DEFINED_ALIASES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persichetti.core.scales.USER_DEFINED_ALIASES" title="Link to this definition"></a></dt>
+<dd><p>Maps user-defined aliases to canonical scale names. Core definitions remain unmodified.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="persichetti.core.scales.USER_DEFINED_SCALES">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">USER_DEFINED_SCALES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#persichetti.core.scales.USER_DEFINED_SCALES" title="Link to this definition"></a></dt>
+<dd><p>Stores user-defined scales. Differentiates multi-octave via the <cite>multi_octave</cite> flag in Scale object.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.add_synthetic_modes">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">add_synthetic_modes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/scales.html#add_synthetic_modes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.add_synthetic_modes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.add_user_defined_scale">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">add_user_defined_scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pitch_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aliases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_octave</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#add_user_defined_scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.add_user_defined_scale" title="Link to this definition"></a></dt>
+<dd><p>Add a new scale if it’s not already present in any registry.
+If the pitch class set exists, only new aliases are registered.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.build_chord_from_degree">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">build_chord_from_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#build_chord_from_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.build_chord_from_degree" title="Link to this definition"></a></dt>
+<dd><p>Build a chord of given extension (3, 4, or 5 notes) from a scale degree.
+- 3 = triad (1–3–5)
+- 4 = seventh chord (1–3–5–7)
+- 5 = ninth chord (1–3–5–7–9)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.build_composite_scale">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">build_composite_scale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#build_composite_scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.build_composite_scale" title="Link to this definition"></a></dt>
+<dd><p>Constructs a multi-octave scale by merging two one-octave scales
+assumed to share a tonic. Duplicate tones are eliminated.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.build_multi_octave_scale_from_tetrachords">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">build_multi_octave_scale_from_tetrachords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tetrachords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.core.scales.Scale" title="persichetti.core.scales.Scale"><span class="pre">Scale</span></a></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#build_multi_octave_scale_from_tetrachords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.build_multi_octave_scale_from_tetrachords" title="Link to this definition"></a></dt>
+<dd><p>Constructs a multi-octave scale from a list of tetrachords.
+Each tetrachord is a 4-note group (e.g. [0, 2, 4, 5]).
+All pitch classes are flattened into one merged scale.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.degree_to_roman">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">degree_to_roman</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">degree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#degree_to_roman"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.degree_to_roman" title="Link to this definition"></a></dt>
+<dd><p>Given a scale degree (0-indexed), return the Roman numeral with chord quality
+based on triadic construction: major, minor, diminished, or augmented.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.has_tritone">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">has_tritone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pitch_classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#has_tritone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.has_tritone" title="Link to this definition"></a></dt>
+<dd><p>Returns True if any interval between two notes is a tritone (6 semitones).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.locrian_tonic_voicing_suggestions">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">locrian_tonic_voicing_suggestions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#locrian_tonic_voicing_suggestions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.locrian_tonic_voicing_suggestions" title="Link to this definition"></a></dt>
+<dd><p>Provides voicing alternatives for the Locrian tonic chord
+to avoid emphasizing the tritone.</p>
+<p>Suggestions include:
+- Omission of the fifth
+- Omission of third and fifth (unison/octave effect)
+- First inversion (3rd in the bass)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.locrian_tritone_themes">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">locrian_tritone_themes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#locrian_tritone_themes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.locrian_tritone_themes" title="Link to this definition"></a></dt>
+<dd><p>Given a Locrian mode, suggest melodic and harmonic patterns that emphasize the
+tritone relationship between the tonic (I) and the fifth scale step (V).</p>
+<p>This highlights the use of the diminished fifth and its thematic potential in Locrian.
+Returns suggestions for melodic emphasis of the tritone.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.modal_brightness">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">modal_brightness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#modal_brightness"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.modal_brightness" title="Link to this definition"></a></dt>
+<dd><p>Returns a relative brightness index for a Diatonic mode.
+-3 = darkest (Locrian)
++3 = brightest (Lydian)
+Returns None if the mode is not part of the Diatonic system.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.roman_to_degree">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">roman_to_degree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">roman</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#roman_to_degree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.roman_to_degree" title="Link to this definition"></a></dt>
+<dd><p>Convert Roman numeral (with ° or +) to a scale degree index.
+Assumes a heptatonic modal system.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.suggest_diminished_alterations">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">suggest_diminished_alterations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#suggest_diminished_alterations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.suggest_diminished_alterations" title="Link to this definition"></a></dt>
+<dd><p>Given a diatonic mode, identifies the diminished triad and suggests chromatic alterations
+that stabilize the tritone (either by raising the fifth or lowering the root).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A dictionary with the original triad and its chromatic variants.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.scales.suggest_modal_chords_diatonic">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.scales.</span></span><span class="sig-name descname"><span class="pre">suggest_modal_chords_diatonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.core.scales.ModalSystem" title="persichetti.core.scales.ModalSystem"><span class="pre">ModalSystem</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/persichetti/core/scales.html#suggest_modal_chords_diatonic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.scales.suggest_modal_chords_diatonic" title="Link to this definition"></a></dt>
+<dd><p>Suggests triads, 7th chords, and 9th chords from a diatonic mode.
+Flags chords containing a tritone, which Persichetti advises against in modal contexts.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of (label, pitch class list, safety marker)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="persichetti.core.resonance.html" class="btn btn-neutral float-left" title="persichetti.core.resonance module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="persichetti.core.texture.html" class="btn btn-neutral float-right" title="persichetti.core.texture module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

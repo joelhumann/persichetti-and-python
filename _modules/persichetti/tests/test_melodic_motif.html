@@ -1,0 +1,183 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persichetti.tests.test_melodic_motif &mdash; Persichetti and Python 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=2709fde1"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Persichetti and Python
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Persichetti and Python</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">persichetti.tests.test_melodic_motif</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for persichetti.tests.test_melodic_motif</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.fundamentals.event</span><span class="w"> </span><span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Rest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.fundamentals.melodic_motif</span><span class="w"> </span><span class="kn">import</span> <span class="n">MelodicMotif</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.fundamentals.pitch_context</span><span class="w"> </span><span class="kn">import</span> <span class="n">PitchContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">persichetti.core.scales</span><span class="w"> </span><span class="kn">import</span> <span class="n">DIATONIC_MODES</span>
+
+<div class="viewcode-block" id="dorian_pitch_context">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.dorian_pitch_context">[docs]</a>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dorian_pitch_context</span><span class="p">():</span>
+    <span class="c1"># DIATONIC_MODES[&quot;Dorian&quot;] has tonic=2, becomes pitch 0 in context</span>
+    <span class="k">return</span> <span class="n">PitchContext</span><span class="p">(</span><span class="n">DIATONIC_MODES</span><span class="p">[</span><span class="s2">&quot;Dorian&quot;</span><span class="p">],</span> <span class="n">tonicity</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_rhythmic_motif_in_dorian_context">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.test_rhythmic_motif_in_dorian_context">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_rhythmic_motif_in_dorian_context</span><span class="p">(</span><span class="n">dorian_pitch_context</span><span class="p">):</span>
+    <span class="c1"># Valid pitch values according to rotated Dorian: [0, 2, 3, 5, 7, 9, 10]</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>  <span class="c1"># Tonic</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>  <span class="c1"># +2 semitones</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>  <span class="c1"># +3 semitones</span>
+        <span class="n">Rest</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>  <span class="c1"># +5 semitones</span>
+    <span class="p">]</span>
+    <span class="n">motif</span> <span class="o">=</span> <span class="n">MelodicMotif</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">pitch_context</span><span class="o">=</span><span class="n">dorian_pitch_context</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">is_rhythmic</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">==</span> <span class="mi">5</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">get_pitches</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="test_free_motif_without_context">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.test_free_motif_without_context">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_free_motif_without_context</span><span class="p">():</span>
+    <span class="c1"># No pitch context: normalize relative to first pitched note</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Note</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="mi">12</span><span class="p">),</span>
+        <span class="n">Note</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="mi">14</span><span class="p">),</span>
+        <span class="n">Rest</span><span class="p">(</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">Note</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">pitch</span><span class="o">=</span><span class="mi">15</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="n">motif</span> <span class="o">=</span> <span class="n">MelodicMotif</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">is_free</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">total_duration</span> <span class="ow">is</span> <span class="kc">None</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">get_pitches</span><span class="p">()</span> <span class="o">==</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="test_pitch_not_allowed_raises">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.test_pitch_not_allowed_raises">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_pitch_not_allowed_raises</span><span class="p">(</span><span class="n">dorian_pitch_context</span><span class="p">):</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>   <span class="c1"># valid</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>   <span class="c1"># 1 % 12 not in rotated Dorian</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">MelodicMotif</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">pitch_context</span><span class="o">=</span><span class="n">dorian_pitch_context</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_mixed_durations_raises">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.test_mixed_durations_raises">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_mixed_durations_raises</span><span class="p">():</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="n">Note</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+        <span class="n">MelodicMotif</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="test_copy_preserves_structure">
+<a class="viewcode-back" href="../../../persichetti.tests.test_melodic_motif.html#persichetti.tests.test_melodic_motif.test_copy_preserves_structure">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_copy_preserves_structure</span><span class="p">(</span><span class="n">dorian_pitch_context</span><span class="p">):</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">Note</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">Rest</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">motif</span> <span class="o">=</span> <span class="n">MelodicMotif</span><span class="p">(</span><span class="n">elements</span><span class="p">,</span> <span class="n">pitch_context</span><span class="o">=</span><span class="n">dorian_pitch_context</span><span class="p">)</span>
+    <span class="n">clone</span> <span class="o">=</span> <span class="n">motif</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">get_pitches</span><span class="p">()</span> <span class="o">==</span> <span class="n">clone</span><span class="o">.</span><span class="n">get_pitches</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">==</span> <span class="n">clone</span><span class="o">.</span><span class="n">total_duration</span>
+    <span class="k">assert</span> <span class="n">motif</span><span class="o">.</span><span class="n">elements</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">clone</span><span class="o">.</span><span class="n">elements</span>
+    <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="n">e1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">e2</span> <span class="k">for</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">motif</span><span class="o">.</span><span class="n">elements</span><span class="p">,</span> <span class="n">clone</span><span class="o">.</span><span class="n">elements</span><span class="p">))</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Joel Humann.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
