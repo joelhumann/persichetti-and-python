@@ -1,5 +1,8 @@
 # Persichetti and Python
+
 ![CI](https://github.com/joelhumann/persichetti-and-python/actions/workflows/ci.yml/badge.svg)
+
+[![Docs](https://img.shields.io/badge/docs-online-blue)](https://joelhumann.github.io/persichetti-and-python/)
 
 **A composer's operating system based on Vincent Persichetti's _Twentieth-Century Harmony_.**
 
