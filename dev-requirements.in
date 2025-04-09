@@ -3,4 +3,4 @@ pytest
 pytest-cov
 flake8
 sphinx==7.2.6
-sphinx_rtd_theme
+sphinx-rtd-theme

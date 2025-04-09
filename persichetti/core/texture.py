@@ -3,6 +3,7 @@ from .intervals import Interval
 from persichetti.fundamentals.pitch import Pitch, PitchClass
 from itertools import combinations
 from collections import Counter
+import math
 
 class ChordTexture:
     """Analyzes voicing and texture of a Chord."""
