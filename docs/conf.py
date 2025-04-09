@@ -11,6 +11,7 @@ release = '0.1'
 # -- General Configuration ---------------------------------------------------
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.githubpages',
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
 ]
