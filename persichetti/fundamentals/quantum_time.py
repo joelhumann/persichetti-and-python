@@ -169,23 +169,30 @@ class TimeMapping:
     def seconds_per_fqmt(self) -> Union[Decimal, Callable[[int], Decimal]]:
         """Duration of one FQMT unit in seconds."""
         return self._seconds_per_fqmt
-    
+
 class TimeContext:
-    def __init__(self, base_note: int):
-        if base_note not in [1, 2, 4, 8, 16, 32, 64, 128]:
-            raise ValueError("Use a standard LilyPond duration as base_note (e.g., 4, 8, 16, 32, 64).")
-        self.base_note = base_note
+    """
+    A container for local temporal information governing motif resolution,
+    including the base rhythmic unit (quantum of time) and other optional
+    timing parameters.
+    """
+           
+    def __init__(self, base_note=None, **kwargs):
+        # Safely initialize base_note if provided
+        self._base_note = base_note
+        # Initialize other optional arguments if needed
+        # (e.g., self.quantum_unit, self.time_signature, etc.)
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
     @property
-    def base_note(self) -> int:
-        """The base note duration (LilyPond-style) for time representation."""
+    def base_note(self):
+        """The rhythmic base unit used as the quantum of time."""
         return self._base_note
-    
-    """
-    Maps quantum durations (quanta) to LilyPond durations using a base note value.
 
-    .. :noindex:
-    """
+    @base_note.setter
+    def base_note(self, value):
+        self._base_note = value  
 
     def quanta_to_lilypond(self, quanta: int) -> str:
         duration = Fraction(quanta, 1) * Fraction(1, self.base_note)
