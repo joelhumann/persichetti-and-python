@@ -25,4 +25,7 @@ html_theme_options = {
     'navigation_depth': 4,
 }
 
-exclude_patterns = ['../setup.py']
+exclude_patterns = ['**/setup.py']
+
+locale_dirs = []  # prevents looking for locales
+gettext_compact = False

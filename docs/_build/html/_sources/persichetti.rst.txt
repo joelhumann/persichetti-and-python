@@ -23,7 +23,6 @@ Submodules
 
    persichetti.check_imports
    persichetti.config
-   persichetti.setup
 
 Module contents
 ---------------

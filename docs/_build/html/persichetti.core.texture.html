@@ -42,7 +42,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">persichetti</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="persichetti.html">persichetti package</a><ul class="current">
@@ -62,6 +62,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
         </div>
@@ -91,8 +93,61 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="persichetti-core-texture-module">
-<h1>persichetti.core.texture module<a class="headerlink" href="#persichetti-core-texture-module" title="Link to this heading"></a></h1>
+  <section id="module-persichetti.core.texture">
+<span id="persichetti-core-texture-module"></span><h1>persichetti.core.texture module<a class="headerlink" href="#module-persichetti.core.texture" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.core.texture.</span></span><span class="sig-name descname"><span class="pre">ChordTexture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Analyzes voicing and texture of a Chord.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.clarity_score">
+<span class="sig-name descname"><span class="pre">clarity_score</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.clarity_score"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.clarity_score" title="Link to this definition"></a></dt>
+<dd><p>Returns a heuristic ‘cloudiness’ score:
+lower = clearer, higher = more clustered.
+Based on average interval spacing (in semitones).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.doubling_profile">
+<span class="sig-name descname"><span class="pre">doubling_profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.doubling_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.doubling_profile" title="Link to this definition"></a></dt>
+<dd><p>Returns a dictionary of pitch class counts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.interval_dominance">
+<span class="sig-name descname"><span class="pre">interval_dominance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.interval_dominance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.interval_dominance" title="Link to this definition"></a></dt>
+<dd><p>Returns a frequency count of interval types in the chord.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.is_percussive">
+<span class="sig-name descname"><span class="pre">is_percussive</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.is_percussive"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.is_percussive" title="Link to this definition"></a></dt>
+<dd><p>Returns True if all pitch classes are doubled (or more),
+implying a percussive voicing style.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.spacing_pattern">
+<span class="sig-name descname"><span class="pre">spacing_pattern</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.spacing_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.spacing_pattern" title="Link to this definition"></a></dt>
+<dd><p>Returns a rough pattern of spacing from bottom to top.
+Example: [‘wide’, ‘close’, ‘wide’]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.core.texture.ChordTexture.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#ChordTexture.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.ChordTexture.summary" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="persichetti.core.texture.amplify_existing_overtones">
+<span class="sig-prename descclassname"><span class="pre">persichetti.core.texture.</span></span><span class="sig-name descname"><span class="pre">amplify_existing_overtones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chord</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partials</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance_cents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/core/texture.html#amplify_existing_overtones"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.core.texture.amplify_existing_overtones" title="Link to this definition"></a></dt>
+<dd><p>Suggests additional pitches that would reinforce overlapping overtones in a chord.</p>
+<p>Returns a list of Pitch objects (not already in the chord) that would strengthen resonance.</p>
+</dd></dl>
+
 </section>
 
 

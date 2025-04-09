@@ -39,9 +39,11 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../modules.html">persichetti</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">Examples</a></li>
 </ul>
 
         </div>
@@ -84,13 +86,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents an absolute point in physical (Clock) time.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        seconds (Decimal): The time value in seconds.</span>
+<span class="sd">    .. :noindex:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">seconds</span><span class="p">:</span> <span class="n">Decimal</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Duration in seconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ClockDuration</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span>
@@ -109,13 +114,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a duration or interval between two points in ClockTime.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        seconds (Decimal): Duration in seconds.</span>
+<span class="sd">    .. :noindex:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">seconds</span><span class="p">:</span> <span class="n">Decimal</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seconds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Duration in seconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ClockDuration</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seconds</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">seconds</span><span class="p">)</span>
@@ -131,16 +139,17 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a constant tempo function for a Musical Inertial Frame.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        bpm (Decimal): Beats per minute.</span>
-<span class="sd">        seconds_per_beat (Decimal): Duration of one beat in seconds.</span>
+<span class="sd">    .. :noindex:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">bpm</span><span class="p">:</span> <span class="n">Decimal</span>
-    <span class="n">seconds_per_beat</span><span class="p">:</span> <span class="n">Decimal</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bpm</span><span class="o">=</span><span class="mi">60</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bpm</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">bpm</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seconds_per_beat</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">bpm</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bpm</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Beats per minute.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bpm</span>
 
 <div class="viewcode-block" id="TempoFunction.beats_to_seconds">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.TempoFunction.beats_to_seconds">[docs]</a>
@@ -153,6 +162,11 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">seconds_to_beats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seconds</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">seconds</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">seconds_per_beat</span></div>
 
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seconds_per_beat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Decimal</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Duration of one beat in seconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds_per_beat</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;TempoFunction(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">bpm</span><span class="si">}</span><span class="s2"> BPM)&quot;</span></div>
@@ -162,19 +176,14 @@
 <div class="viewcode-block" id="MusicalInertialFrame">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.MusicalInertialFrame">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MusicalInertialFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Defines a local temporal reference frame for a musical voice.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        tempo_function (TempoFunction): Governs the beat-to-clock mapping.</span>
-<span class="sd">        start_time (ClockTime): The starting time of the frame in ClockTime.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">tempo_function</span><span class="p">:</span> <span class="n">TempoFunction</span>
-    <span class="n">start_time</span><span class="p">:</span> <span class="n">ClockTime</span>
-
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tempo_function</span><span class="p">:</span> <span class="n">TempoFunction</span><span class="p">,</span> <span class="n">start_time</span><span class="p">:</span> <span class="n">ClockTime</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tempo_function</span> <span class="o">=</span> <span class="n">tempo_function</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">start_time</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines a local temporal reference frame for a musical voice.</span>
+
+<span class="sd">    .. :noindex:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MusicalInertialFrame.beat_to_clock_time">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.MusicalInertialFrame.beat_to_clock_time">[docs]</a>
@@ -201,13 +210,16 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the Fundamental Quantum of Musical Time (FQMT) for a set of Musical Inertial Frames.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        frames (list of Fraction): List of smallest unit durations (in seconds) per MIF.</span>
+<span class="sd">    .. :noindex:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">frames</span><span class="p">:</span> <span class="nb">list</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">frames</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolved temporal frames in the timeline.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frames</span>
 
 <div class="viewcode-block" id="FQMTResolver.add_frame">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.FQMTResolver.add_frame">[docs]</a>
@@ -235,19 +247,20 @@
 <div class="viewcode-block" id="TimeMapping">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.TimeMapping">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TimeMapping</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fqmt</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">,</span> <span class="n">seconds_per_fqmt</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Decimal</span><span class="p">]]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fqmt</span> <span class="o">=</span> <span class="n">fqmt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seconds_per_fqmt</span> <span class="o">=</span> <span class="n">seconds_per_fqmt</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fqmt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Fraction</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fundamental Quantum of Musical Time (FQMT).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fqmt</span>
+<span class="w">    </span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Maps the Fundamental Quantum of Musical Time (FQMT) to real ClockTime.</span>
 
-<span class="sd">    Attributes:</span>
-<span class="sd">        fqmt (Fraction): The quantum unit in musical time.</span>
-<span class="sd">        seconds_per_fqmt (Decimal or callable): Duration of one FQMT in seconds or a function.</span>
+<span class="sd">    .. :noindex:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">fqmt</span><span class="p">:</span> <span class="n">Fraction</span>
-    <span class="n">seconds_per_fqmt</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Decimal</span><span class="p">]]</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fqmt</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">,</span> <span class="n">seconds_per_fqmt</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fqmt</span> <span class="o">=</span> <span class="n">fqmt</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">seconds_per_fqmt</span> <span class="o">=</span> <span class="n">seconds_per_fqmt</span>
 
 <div class="viewcode-block" id="TimeMapping.musical_to_clock">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.TimeMapping.musical_to_clock">[docs]</a>
@@ -264,25 +277,32 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">set_tempo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bpm_for_unit</span><span class="p">:</span> <span class="n">Fraction</span><span class="p">):</span>
         <span class="n">seconds</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">bpm_for_unit</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seconds_per_fqmt</span> <span class="o">=</span> <span class="n">seconds</span></div>
-</div>
 
 
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">seconds_per_fqmt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Decimal</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">int</span><span class="p">],</span> <span class="n">Decimal</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Duration of one FQMT unit in seconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_seconds_per_fqmt</span></div>
 
+    
 <div class="viewcode-block" id="TimeContext">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.TimeContext">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TimeContext</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Maps quantum durations (quanta) to LilyPond durations using a base note value.</span>
-
-<span class="sd">    Attributes:</span>
-<span class="sd">        base_note (int): The note value that represents one quantum (e.g., 64 = 1/64 note).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">base_note</span><span class="p">:</span> <span class="nb">int</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_note</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">64</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_note</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">base_note</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Use a standard LilyPond duration as base_note (e.g., 4, 8, 16, 32, 64).&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">base_note</span> <span class="o">=</span> <span class="n">base_note</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">base_note</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The base note duration (LilyPond-style) for time representation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base_note</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Maps quantum durations (quanta) to LilyPond durations using a base note value.</span>
+
+<span class="sd">    .. :noindex:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TimeContext.quanta_to_lilypond">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.quantum_time.html#persichetti.fundamentals.quantum_time.TimeContext.quanta_to_lilypond">[docs]</a>

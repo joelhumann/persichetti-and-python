@@ -42,7 +42,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Get Started</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">persichetti</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="persichetti.html">persichetti package</a><ul class="current">
@@ -62,6 +62,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
         </div>
@@ -98,21 +100,11 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">ClockDuration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#ClockDuration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockDuration" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a duration or interval between two points in ClockTime.</p>
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.ClockDuration.seconds">
-<span class="sig-name descname"><span class="pre">seconds</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockDuration.seconds" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockDuration.seconds" title="Link to this definition"></a></dt>
 <dd><p>Duration in seconds.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Decimal</p>
-</dd>
-</dl>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#id0" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -121,21 +113,11 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">ClockTime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seconds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#ClockTime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockTime" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents an absolute point in physical (Clock) time.</p>
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.ClockTime.seconds">
-<span class="sig-name descname"><span class="pre">seconds</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockTime.seconds" title="Link to this definition"></a></dt>
-<dd><p>The time value in seconds.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Decimal</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.ClockTime.seconds" title="Link to this definition"></a></dt>
+<dd><p>Duration in seconds.</p>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">seconds</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#id1" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -144,17 +126,6 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">FQMTResolver</span></span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#FQMTResolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.FQMTResolver" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Computes the Fundamental Quantum of Musical Time (FQMT) for a set of Musical Inertial Frames.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.FQMTResolver.frames">
-<span class="sig-name descname"><span class="pre">frames</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.FQMTResolver.frames" title="Link to this definition"></a></dt>
-<dd><p>List of smallest unit durations (in seconds) per MIF.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list of Fraction</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.FQMTResolver.add_frame">
 <span class="sig-name descname"><span class="pre">add_frame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mif</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame" title="persichetti.fundamentals.quantum_time.MusicalInertialFrame"><span class="pre">MusicalInertialFrame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">smallest_unit_in_beats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Fraction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#FQMTResolver.add_frame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.FQMTResolver.add_frame" title="Link to this definition"></a></dt>
@@ -165,10 +136,11 @@
 <span class="sig-name descname"><span class="pre">compute_fqmt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#FQMTResolver.compute_fqmt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.FQMTResolver.compute_fqmt" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id2">
-<span class="sig-name descname"><span class="pre">frames</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#id2" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.FQMTResolver.frames">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">frames</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.FQMTResolver.frames" title="Link to this definition"></a></dt>
+<dd><p>Resolved temporal frames in the timeline.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -176,29 +148,6 @@
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.MusicalInertialFrame">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">MusicalInertialFrame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tempo_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.fundamentals.quantum_time.TempoFunction" title="persichetti.fundamentals.quantum_time.TempoFunction"><span class="pre">TempoFunction</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.fundamentals.quantum_time.ClockTime" title="persichetti.fundamentals.quantum_time.ClockTime"><span class="pre">ClockTime</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#MusicalInertialFrame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Defines a local temporal reference frame for a musical voice.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.MusicalInertialFrame.tempo_function">
-<span class="sig-name descname"><span class="pre">tempo_function</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame.tempo_function" title="Link to this definition"></a></dt>
-<dd><p>Governs the beat-to-clock mapping.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#persichetti.fundamentals.quantum_time.TempoFunction" title="persichetti.fundamentals.quantum_time.TempoFunction">TempoFunction</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.MusicalInertialFrame.start_time">
-<span class="sig-name descname"><span class="pre">start_time</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame.start_time" title="Link to this definition"></a></dt>
-<dd><p>The starting time of the frame in ClockTime.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#persichetti.fundamentals.quantum_time.ClockTime" title="persichetti.fundamentals.quantum_time.ClockTime">ClockTime</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.MusicalInertialFrame.beat_to_clock_time">
 <span class="sig-name descname"><span class="pre">beat_to_clock_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beat_number</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#MusicalInertialFrame.beat_to_clock_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame.beat_to_clock_time" title="Link to this definition"></a></dt>
@@ -209,16 +158,6 @@
 <span class="sig-name descname"><span class="pre">clock_time_to_beat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clock_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#persichetti.fundamentals.quantum_time.ClockTime" title="persichetti.fundamentals.quantum_time.ClockTime"><span class="pre">ClockTime</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#MusicalInertialFrame.clock_time_to_beat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.MusicalInertialFrame.clock_time_to_beat" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">start_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.fundamentals.quantum_time.ClockTime" title="persichetti.fundamentals.quantum_time.ClockTime"><span class="pre">ClockTime</span></a></em><a class="headerlink" href="#id3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id4">
-<span class="sig-name descname"><span class="pre">tempo_function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#persichetti.fundamentals.quantum_time.TempoFunction" title="persichetti.fundamentals.quantum_time.TempoFunction"><span class="pre">TempoFunction</span></a></em><a class="headerlink" href="#id4" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
 <dl class="py class">
@@ -226,42 +165,22 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">TempoFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TempoFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a constant tempo function for a Musical Inertial Frame.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.bpm">
-<span class="sig-name descname"><span class="pre">bpm</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction.bpm" title="Link to this definition"></a></dt>
-<dd><p>Beats per minute.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Decimal</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.seconds_per_beat">
-<span class="sig-name descname"><span class="pre">seconds_per_beat</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction.seconds_per_beat" title="Link to this definition"></a></dt>
-<dd><p>Duration of one beat in seconds.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Decimal</p>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.beats_to_seconds">
 <span class="sig-name descname"><span class="pre">beats_to_seconds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">beats</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TempoFunction.beats_to_seconds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction.beats_to_seconds" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id5">
-<span class="sig-name descname"><span class="pre">bpm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#id5" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.bpm">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bpm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction.bpm" title="Link to this definition"></a></dt>
+<dd><p>Beats per minute.</p>
+</dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id6">
-<span class="sig-name descname"><span class="pre">seconds_per_beat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#id6" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.seconds_per_beat">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds_per_beat</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TempoFunction.seconds_per_beat" title="Link to this definition"></a></dt>
+<dd><p>Duration of one beat in seconds.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TempoFunction.seconds_to_beats">
@@ -272,24 +191,13 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeContext">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">TimeContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">64</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TimeContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeContext" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">TimeContext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TimeContext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeContext" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Maps quantum durations (quanta) to LilyPond durations using a base note value.</p>
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeContext.base_note">
-<span class="sig-name descname"><span class="pre">base_note</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeContext.base_note" title="Link to this definition"></a></dt>
-<dd><p>The note value that represents one quantum (e.g., 64 = 1/64 note).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">base_note</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeContext.base_note" title="Link to this definition"></a></dt>
+<dd><p>The base note duration (LilyPond-style) for time representation.</p>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id7">
-<span class="sig-name descname"><span class="pre">base_note</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#id7" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeContext.quanta_to_lilypond">
@@ -300,45 +208,24 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">TimeMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_fqmt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TimeMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">persichetti.fundamentals.quantum_time.</span></span><span class="sig-name descname"><span class="pre">TimeMapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fqmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seconds_per_fqmt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Decimal</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Decimal</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TimeMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Maps the Fundamental Quantum of Musical Time (FQMT) to real ClockTime.</p>
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping.fqmt">
-<span class="sig-name descname"><span class="pre">fqmt</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping.fqmt" title="Link to this definition"></a></dt>
-<dd><p>The quantum unit in musical time.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Fraction</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fqmt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Fraction</span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping.fqmt" title="Link to this definition"></a></dt>
+<dd><p>Fundamental Quantum of Musical Time (FQMT).</p>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping.seconds_per_fqmt">
-<span class="sig-name descname"><span class="pre">seconds_per_fqmt</span></span><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping.seconds_per_fqmt" title="Link to this definition"></a></dt>
-<dd><p>Duration of one FQMT in seconds or a function.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Decimal or callable</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id8">
-<span class="sig-name descname"><span class="pre">fqmt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Fraction</span></em><a class="headerlink" href="#id8" title="Link to this definition"></a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping.musical_to_clock">
 <span class="sig-name descname"><span class="pre">musical_to_clock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tick_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.fundamentals.quantum_time.ClockTime" title="persichetti.fundamentals.quantum_time.ClockTime"><span class="pre">ClockTime</span></a></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/quantum_time.html#TimeMapping.musical_to_clock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping.musical_to_clock" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="id9">
-<span class="sig-name descname"><span class="pre">seconds_per_fqmt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Decimal</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#id9" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping.seconds_per_fqmt">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds_per_fqmt</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Decimal</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Decimal</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#persichetti.fundamentals.quantum_time.TimeMapping.seconds_per_fqmt" title="Link to this definition"></a></dt>
+<dd><p>Duration of one FQMT unit in seconds.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.quantum_time.TimeMapping.set_tempo">

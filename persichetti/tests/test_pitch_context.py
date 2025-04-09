@@ -1,6 +1,6 @@
 import pytest
-from fundamentals.pitch_context import PitchContext
-from core.scales import DIATONIC_MODES, Scale
+from persichetti.fundamentals.pitch_context import PitchContext
+from persichetti.core.scales import DIATONIC_MODES, Scale
 
 def test_pitch_context_rotates_tonic_to_zero():
     mode = DIATONIC_MODES["Dorian"]  # tonic = 2

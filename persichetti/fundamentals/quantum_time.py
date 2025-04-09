@@ -11,13 +11,16 @@ class ClockTime:
     """
     Represents an absolute point in physical (Clock) time.
 
-    Attributes:
-        seconds (Decimal): The time value in seconds.
+    .. :noindex:
     """
-    seconds: Decimal
 
     def __init__(self, seconds):
         self.seconds = Decimal(seconds)
+
+    @property
+    def seconds(self) -> Decimal:
+        """Duration in seconds."""
+        return self._seconds
 
     def __sub__(self, other):
         return ClockDuration(self.seconds - other.seconds)
@@ -33,13 +36,16 @@ class ClockDuration:
     """
     Represents a duration or interval between two points in ClockTime.
 
-    Attributes:
-        seconds (Decimal): Duration in seconds.
+    .. :noindex:
     """
-    seconds: Decimal
 
     def __init__(self, seconds):
         self.seconds = Decimal(seconds)
+
+    @property
+    def seconds(self) -> Decimal:
+        """Duration in seconds."""
+        return self._seconds
 
     def __add__(self, other):
         return ClockDuration(self.seconds + other.seconds)
@@ -52,41 +58,42 @@ class TempoFunction:
     """
     Represents a constant tempo function for a Musical Inertial Frame.
 
-    Attributes:
-        bpm (Decimal): Beats per minute.
-        seconds_per_beat (Decimal): Duration of one beat in seconds.
+    .. :noindex:
     """
-    bpm: Decimal
-    seconds_per_beat: Decimal
 
     def __init__(self, bpm=60):
         self.bpm = Decimal(bpm)
         self.seconds_per_beat = Decimal(60) / self.bpm
+
+    @property
+    def bpm(self) -> Decimal:
+        """Beats per minute."""
+        return self._bpm
 
     def beats_to_seconds(self, beats):
         return ClockDuration(beats * self.seconds_per_beat)
 
     def seconds_to_beats(self, seconds):
         return Decimal(seconds) / self.seconds_per_beat
+    
+    @property
+    def seconds_per_beat(self) -> Decimal:
+        """Duration of one beat in seconds."""
+        return self._seconds_per_beat
 
     def __repr__(self):
         return f"TempoFunction({self.bpm} BPM)"
 
 
 class MusicalInertialFrame:
-    """
-    Defines a local temporal reference frame for a musical voice.
-
-    Attributes:
-        tempo_function (TempoFunction): Governs the beat-to-clock mapping.
-        start_time (ClockTime): The starting time of the frame in ClockTime.
-    """
-    tempo_function: TempoFunction
-    start_time: ClockTime
-
     def __init__(self, tempo_function: TempoFunction, start_time: ClockTime):
         self.tempo_function = tempo_function
         self.start_time = start_time
+    """
+    Defines a local temporal reference frame for a musical voice.
+
+    .. :noindex:
+    """
 
     def beat_to_clock_time(self, beat_number):
         offset = self.tempo_function.beats_to_seconds(beat_number)
@@ -104,13 +111,16 @@ class FQMTResolver:
     """
     Computes the Fundamental Quantum of Musical Time (FQMT) for a set of Musical Inertial Frames.
 
-    Attributes:
-        frames (list of Fraction): List of smallest unit durations (in seconds) per MIF.
+    .. :noindex:
     """
-    frames: list
 
     def __init__(self):
         self.frames = []
+
+    @property
+    def frames(self) -> list:
+        """Resolved temporal frames in the timeline."""
+        return self._frames
 
     def add_frame(self, mif: MusicalInertialFrame, smallest_unit_in_beats: Fraction):
         duration_in_seconds = smallest_unit_in_beats * Decimal(mif.tempo_function.seconds_per_beat)
@@ -129,19 +139,20 @@ class FQMTResolver:
 
 
 class TimeMapping:
+    def __init__(self, fqmt: Fraction, seconds_per_fqmt: Union[Decimal, Callable[[int], Decimal]]):
+        self.fqmt = fqmt
+        self.seconds_per_fqmt = seconds_per_fqmt
+
+    @property
+    def fqmt(self) -> Fraction:
+        """Fundamental Quantum of Musical Time (FQMT)."""
+        return self._fqmt
+    
     """
     Maps the Fundamental Quantum of Musical Time (FQMT) to real ClockTime.
 
-    Attributes:
-        fqmt (Fraction): The quantum unit in musical time.
-        seconds_per_fqmt (Decimal or callable): Duration of one FQMT in seconds or a function.
+    .. :noindex:
     """
-    fqmt: Fraction
-    seconds_per_fqmt: Union[Decimal, Callable[[int], Decimal]]
-
-    def __init__(self, fqmt: Fraction, seconds_per_fqmt):
-        self.fqmt = fqmt
-        self.seconds_per_fqmt = seconds_per_fqmt
 
     def musical_to_clock(self, tick_index: int) -> ClockTime:
         if callable(self.seconds_per_fqmt):
@@ -154,20 +165,27 @@ class TimeMapping:
         seconds = Decimal(60) / Decimal(bpm_for_unit)
         self.seconds_per_fqmt = seconds
 
-
+    @property
+    def seconds_per_fqmt(self) -> Union[Decimal, Callable[[int], Decimal]]:
+        """Duration of one FQMT unit in seconds."""
+        return self._seconds_per_fqmt
+    
 class TimeContext:
-    """
-    Maps quantum durations (quanta) to LilyPond durations using a base note value.
-
-    Attributes:
-        base_note (int): The note value that represents one quantum (e.g., 64 = 1/64 note).
-    """
-    base_note: int
-
-    def __init__(self, base_note: int = 64):
+    def __init__(self, base_note: int):
         if base_note not in [1, 2, 4, 8, 16, 32, 64, 128]:
             raise ValueError("Use a standard LilyPond duration as base_note (e.g., 4, 8, 16, 32, 64).")
         self.base_note = base_note
+
+    @property
+    def base_note(self) -> int:
+        """The base note duration (LilyPond-style) for time representation."""
+        return self._base_note
+    
+    """
+    Maps quantum durations (quanta) to LilyPond durations using a base note value.
+
+    .. :noindex:
+    """
 
     def quanta_to_lilypond(self, quanta: int) -> str:
         duration = Fraction(quanta, 1) * Fraction(1, self.base_note)
