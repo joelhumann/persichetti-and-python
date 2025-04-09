@@ -2,6 +2,10 @@
 
 from pathlib import Path
 import sys
+import shutil
+import pytest
+
+lilypond_exists = shutil.which("lilypond") is not None
 
 # Ensure persichetti/ is importable
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -40,11 +44,13 @@ resolver = LilypondResolver(
     reference_midi=62  # D4 as concrete pitch for pitch=0
 )
 
-print("Rendering motif to PDF...")
-pdf_path = resolver.quick_render(
-    pseudocode,
-    filename="test_motif_output.ly",
-    staff_size=16
-)
-print(f"✅ Output written to: {pdf_path}")
-
+if lilypond_exists:
+    print("Rendering motif to PDF...")
+    pdf_path = resolver.quick_render(
+        pseudocode,
+        filename="test_motif_output.ly",
+        staff_size=16
+    )
+    
+else:
+    print("Skipping LilyPond render: LilyPond binary not found.")
