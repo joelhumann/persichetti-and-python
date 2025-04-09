@@ -150,6 +150,18 @@
                 <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_pitched</span><span class="p">():</span>
                     <span class="n">e</span><span class="o">.</span><span class="n">pitch</span> <span class="o">-=</span> <span class="n">ref</span>
 
+<div class="viewcode-block" id="MelodicMotif.normalize">
+<a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.normalize">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Re-applies pitch normalization:</span>
+<span class="sd">        - Validates that all pitches conform to the PitchContext, if set.</span>
+<span class="sd">        - Otherwise, shifts pitches so that the first pitched note becomes 0.</span>
+<span class="sd">        This method modifies the motif in place.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_pitches</span><span class="p">()</span></div>
+
+
     <span class="k">def</span><span class="w"> </span><span class="nf">_first_pitched_note</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the pitch value of the first pitched note.</span>
@@ -186,6 +198,17 @@
 <span class="sd">        Returns True if the motif has no defined duration.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="ow">is</span> <span class="kc">None</span></div>
+
+    
+<div class="viewcode-block" id="MelodicMotif.get_pitch_context">
+<a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitch_context">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_pitch_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the pitch context associated with the motif, or None if unset.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span><span class="p">,</span> <span class="n">PitchContext</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;pitch_context must be a PitchContext or None&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -118,6 +118,12 @@ The pitch_context is shared (assumed immutable), but elements are copied.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitch_context">
+<span class="sig-name descname"><span class="pre">get_pitch_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.get_pitch_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitch_context" title="Link to this definition"></a></dt>
+<dd><p>Returns the pitch context associated with the motif, or None if unset.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitches">
 <span class="sig-name descname"><span class="pre">get_pitches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.get_pitches"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitches" title="Link to this definition"></a></dt>
 <dd><p>Returns a list of pitch values for each element.
@@ -134,6 +140,15 @@ Unpitched notes and rests return None.</p>
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic">
 <span class="sig-name descname"><span class="pre">is_rhythmic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.is_rhythmic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic" title="Link to this definition"></a></dt>
 <dd><p>Returns True if the motif has a defined total duration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.normalize">
+<span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.normalize" title="Link to this definition"></a></dt>
+<dd><p>Re-applies pitch normalization:
+- Validates that all pitches conform to the PitchContext, if set.
+- Otherwise, shifts pitches so that the first pitched note becomes 0.
+This method modifies the motif in place.</p>
 </dd></dl>
 
 </dd></dl>
