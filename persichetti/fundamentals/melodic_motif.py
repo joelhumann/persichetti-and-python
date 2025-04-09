@@ -75,6 +75,15 @@ class MelodicMotif:
                 if e.is_pitched():
                     e.pitch -= ref
 
+    def normalize(self):
+        """
+        Re-applies pitch normalization:
+        - Validates that all pitches conform to the PitchContext, if set.
+        - Otherwise, shifts pitches so that the first pitched note becomes 0.
+        This method modifies the motif in place.
+        """
+        self._normalize_pitches()
+
     def _first_pitched_note(self) -> int:
         """
         Returns the pitch value of the first pitched note.
@@ -103,6 +112,14 @@ class MelodicMotif:
         Returns True if the motif has no defined duration.
         """
         return self.total_duration is None
+    
+    def get_pitch_context(self):
+        """
+        Returns the pitch context associated with the motif, or None if unset.
+        """
+        if self.pitch_context is not None and not isinstance(self.pitch_context, PitchContext):
+            raise TypeError("pitch_context must be a PitchContext or None")
+        return self.pitch_context
 
     def __repr__(self):
         kind = "Free" if self.is_free() else f"Duration: {self.total_duration}"
