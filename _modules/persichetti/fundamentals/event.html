@@ -71,9 +71,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for persichetti.fundamentals.event</h1><div class="highlight"><pre>
-<span></span><span class="c1"># fundamentals/event.py</span>
+<span></span><span class="c1">#fundamentals/event.py</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
 
 
 <div class="viewcode-block" id="Element">
@@ -81,13 +82,21 @@
 <span class="k">class</span><span class="w"> </span><span class="nc">Element</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for any musical time element (note or rest).</span>
-<span class="sd">    Duration is expressed in integer quantum units ≥ 1,</span>
-<span class="sd">    or None for an indefinite duration.</span>
+
+<span class="sd">    Duration is expressed as:</span>
+<span class="sd">    - an integer (e.g., 1, 2)</span>
+<span class="sd">    - a Fraction (e.g., 2/3, 3/5)</span>
+<span class="sd">    - or None (for indefinite/free durations)</span>
+
+<span class="sd">    Durations must be strictly &gt; 0 if defined.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">duration</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Element duration must be ≥ 1 quantum or None for indefinite.&quot;</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]]):</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">)):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Duration must be an int, Fraction, or None.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">duration</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Duration must be &gt; 0 if defined.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span>
 
 <div class="viewcode-block" id="Element.is_note">
@@ -107,13 +116,13 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">is_pitched</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>  <span class="c1"># overridden by Note</span></div>
 
-    
+
 <div class="viewcode-block" id="Element.is_unpitched">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Element.is_unpitched">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_unpitched</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_pitched</span><span class="p">()</span></div>
 
-    
+
 <div class="viewcode-block" id="Element.kind">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Element.kind">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">kind</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -134,7 +143,7 @@
 
 <div class="viewcode-block" id="Element.scale_duration">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Element.scale_duration">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot scale an indefinite duration.&quot;</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Must be implemented in subclass.&quot;</span><span class="p">)</span></div>
@@ -145,7 +154,7 @@
 <div class="viewcode-block" id="Note">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Note">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Note</span><span class="p">(</span><span class="n">Element</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pitch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]],</span> <span class="n">pitch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">pitch</span>  <span class="c1"># None = unpitched</span>
 
@@ -163,11 +172,12 @@
 
 <div class="viewcode-block" id="Note.scale_duration">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Note.scale_duration">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot scale an indefinite duration.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Note</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">)</span></div>
 </div>
+
 
 
 <div class="viewcode-block" id="Rest">
@@ -181,8 +191,8 @@
 
 <div class="viewcode-block" id="Rest.scale_duration">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.event.html#persichetti.fundamentals.event.Rest.scale_duration">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">scale_duration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot scale an indefinite duration.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Rest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span></div>
 </div>

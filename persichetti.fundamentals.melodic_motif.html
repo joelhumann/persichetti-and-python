@@ -101,20 +101,30 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Represents a monophonic sequence of musical elements (Notes and Rests).</p>
 <p>A MelodicMotif may be:
-- Free (no rhythmic duration): all elements must have duration=None.
-- Rhythmic (quantized in time): all elements must have an integer duration.</p>
+- Free (unquantized): all elements must have duration=None.
+- Rhythmic (quantized): all elements must have a numerical duration,</p>
+<blockquote>
+<div><p>expressed in integer or fractional multiples of a quantum time unit.</p>
+</div></blockquote>
+<p>Durations may be:
+- Integer (e.g. 1, 2, 4) for simple subdivisions
+- Fractional (e.g. 2/3, 3/5, 7/8) for complex tuplets</p>
+<p>All durations must share a common interpretation via a quantum time unit
+(typically specified in a <cite>TimeContext</cite>).</p>
 <p>A motif may include:
-- Pitched notes (with integer pitch values)
+- Pitched notes (int)
 - Unpitched notes (pitch=None)
-- Rests</p>
-<p>Pitched notes are interpreted in one of two ways:
-- With a PitchContext: validated against a pitch set (e.g., modal/tonal system)
-- Without a PitchContext: pitches are relative integers, normalized so the first pitched note is 0</p>
+- Rests (no pitch)</p>
+<p>Pitched notes are interpreted as:
+- Relative pitch classes (semitones) if <cite>pitch_context</cite> is None
+- Validated modal/tonal pitches if <cite>pitch_context</cite> is provided</p>
+<p>[Note(0, Fraction(2, 3)), Note(2, Fraction(1, 3)), Rest(Fraction(1, 3))]
+→ Tuplet-like rhythmic grouping (e.g. 3 in the time of 2)</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#persichetti.fundamentals.melodic_motif.MelodicMotif" title="persichetti.fundamentals.melodic_motif.MelodicMotif"><span class="pre">MelodicMotif</span></a></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.copy" title="Link to this definition"></a></dt>
-<dd><p>Returns a deep copy of this MelodicMotif, including all elements.
-The pitch_context is shared (assumed immutable), but elements are copied.</p>
+<dd><p>Returns a deep copy of this MelodicMotif.
+The pitch_context is shared (assumed immutable), but all elements are copied.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -133,22 +143,21 @@ Unpitched notes and rests return None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.is_free">
 <span class="sig-name descname"><span class="pre">is_free</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.is_free"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.is_free" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the motif has no defined duration.</p>
+<dd><p>Returns True if the motif has no durations (i.e., free rhythm).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic">
 <span class="sig-name descname"><span class="pre">is_rhythmic</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.is_rhythmic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic" title="Link to this definition"></a></dt>
-<dd><p>Returns True if the motif has a defined total duration.</p>
+<dd><p>Returns True if the motif has a defined rhythmic structure.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="persichetti.fundamentals.melodic_motif.MelodicMotif.normalize">
 <span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/persichetti/fundamentals/melodic_motif.html#MelodicMotif.normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#persichetti.fundamentals.melodic_motif.MelodicMotif.normalize" title="Link to this definition"></a></dt>
-<dd><p>Re-applies pitch normalization:
-- Validates that all pitches conform to the PitchContext, if set.
-- Otherwise, shifts pitches so that the first pitched note becomes 0.
-This method modifies the motif in place.</p>
+<dd><p>Re-applies pitch normalization.
+- With a context: validates all pitches
+- Without context: shifts first pitched note to 0</p>
 </dd></dl>
 
 </dd></dl>

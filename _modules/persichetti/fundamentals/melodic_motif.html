@@ -71,9 +71,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for persichetti.fundamentals.melodic_motif</h1><div class="highlight"><pre>
-<span></span><span class="c1"># fundamentals/melodic_motif.py</span>
+<span></span><span class="c1">#fundamentals/melodic_motif.py</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.event</span><span class="w"> </span><span class="kn">import</span> <span class="n">Element</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Rest</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.pitch_context</span><span class="w"> </span><span class="kn">import</span> <span class="n">PitchContext</span>
 
@@ -85,17 +86,36 @@
 <span class="sd">    Represents a monophonic sequence of musical elements (Notes and Rests).</span>
 
 <span class="sd">    A MelodicMotif may be:</span>
-<span class="sd">    - Free (no rhythmic duration): all elements must have duration=None.</span>
-<span class="sd">    - Rhythmic (quantized in time): all elements must have an integer duration.</span>
+<span class="sd">    - Free (unquantized): all elements must have duration=None.</span>
+<span class="sd">    - Rhythmic (quantized): all elements must have a numerical duration,</span>
+<span class="sd">      expressed in integer or fractional multiples of a quantum time unit.</span>
+
+<span class="sd">    ------------------</span>
+<span class="sd">    RHYTHMIC STRUCTURE:</span>
+
+<span class="sd">    Durations may be:</span>
+<span class="sd">    - Integer (e.g. 1, 2, 4) for simple subdivisions</span>
+<span class="sd">    - Fractional (e.g. 2/3, 3/5, 7/8) for complex tuplets</span>
+
+<span class="sd">    All durations must share a common interpretation via a quantum time unit</span>
+<span class="sd">    (typically specified in a `TimeContext`).</span>
+
+<span class="sd">    ------------------</span>
+<span class="sd">    PITCH STRUCTURE:</span>
 
 <span class="sd">    A motif may include:</span>
-<span class="sd">    - Pitched notes (with integer pitch values)</span>
+<span class="sd">    - Pitched notes (int)</span>
 <span class="sd">    - Unpitched notes (pitch=None)</span>
-<span class="sd">    - Rests</span>
+<span class="sd">    - Rests (no pitch)</span>
 
-<span class="sd">    Pitched notes are interpreted in one of two ways:</span>
-<span class="sd">    - With a PitchContext: validated against a pitch set (e.g., modal/tonal system)</span>
-<span class="sd">    - Without a PitchContext: pitches are relative integers, normalized so the first pitched note is 0</span>
+<span class="sd">    Pitched notes are interpreted as:</span>
+<span class="sd">    - Relative pitch classes (semitones) if `pitch_context` is None</span>
+<span class="sd">    - Validated modal/tonal pitches if `pitch_context` is provided</span>
+
+<span class="sd">    ------------------</span>
+<span class="sd">    Example:</span>
+<span class="sd">        [Note(0, Fraction(2, 3)), Note(2, Fraction(1, 3)), Rest(Fraction(1, 3))]</span>
+<span class="sd">        → Tuplet-like rhythmic grouping (e.g. 3 in the time of 2)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
@@ -114,26 +134,29 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_duration_consistency</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Enforces that all elements are either durational (integer) or free (None).</span>
+<span class="sd">        Validates whether the motif is free or rhythmic.</span>
+<span class="sd">        - Free: all elements must have duration=None</span>
+<span class="sd">        - Rhythmic: all elements must have a numeric duration (int or Fraction)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">durations</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">duration</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">durations</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># free motif</span>
-        <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">durations</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">durations</span><span class="p">)</span>  <span class="c1"># rhythmic motif</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Free motif</span>
+        <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Fraction</span><span class="p">))</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">durations</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Fraction</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">durations</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Motif elements must be either all durational or all free.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Motif elements must be either all durational (int or Fraction) or all free (None).&quot;</span>
+            <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_normalize_pitches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Enforces pitch validity and normalization:</span>
-<span class="sd">        - If pitch_context is provided, validates that all pitches are allowed.</span>
-<span class="sd">        - If no pitch_context, treats first pitched note as reference (pitch = 0)</span>
-<span class="sd">          and adjusts other pitches as semitone offsets.</span>
+<span class="sd">        Enforces pitch normalization:</span>
+<span class="sd">        - With a PitchContext: validates pitches</span>
+<span class="sd">        - Without context: shifts first pitched note to pitch 0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">is_pitched</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">):</span>
-            <span class="k">return</span>  <span class="c1"># no pitched notes to normalize</span>
+            <span class="k">return</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span><span class="p">:</span>
             <span class="n">reference</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span><span class="o">.</span><span class="n">get_reference</span><span class="p">(</span>
@@ -144,7 +167,6 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_context</span><span class="o">.</span><span class="n">is_allowed</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">pitch</span><span class="p">):</span>
                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pitch </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> not allowed in pitch context.&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># Re-center all pitched notes so that first becomes 0</span>
             <span class="n">ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_pitched_note</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_pitched</span><span class="p">():</span>
@@ -154,10 +176,9 @@
 <a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.normalize">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Re-applies pitch normalization:</span>
-<span class="sd">        - Validates that all pitches conform to the PitchContext, if set.</span>
-<span class="sd">        - Otherwise, shifts pitches so that the first pitched note becomes 0.</span>
-<span class="sd">        This method modifies the motif in place.</span>
+<span class="sd">        Re-applies pitch normalization.</span>
+<span class="sd">        - With a context: validates all pitches</span>
+<span class="sd">        - Without context: shifts first pitched note to 0</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_pitches</span><span class="p">()</span></div>
 
@@ -186,7 +207,7 @@
 <a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.is_rhythmic">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_rhythmic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns True if the motif has a defined total duration.</span>
+<span class="sd">        Returns True if the motif has a defined rhythmic structure.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
 
@@ -195,11 +216,11 @@
 <a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.is_free">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_free</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns True if the motif has no defined duration.</span>
+<span class="sd">        Returns True if the motif has no durations (i.e., free rhythm).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_duration</span> <span class="ow">is</span> <span class="kc">None</span></div>
 
-    
+
 <div class="viewcode-block" id="MelodicMotif.get_pitch_context">
 <a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.get_pitch_context">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_pitch_context</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -220,8 +241,8 @@
 <a class="viewcode-back" href="../../../persichetti.fundamentals.melodic_motif.html#persichetti.fundamentals.melodic_motif.MelodicMotif.copy">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MelodicMotif&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns a deep copy of this MelodicMotif, including all elements.</span>
-<span class="sd">        The pitch_context is shared (assumed immutable), but elements are copied.</span>
+<span class="sd">        Returns a deep copy of this MelodicMotif.</span>
+<span class="sd">        The pitch_context is shared (assumed immutable), but all elements are copied.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">MelodicMotif</span><span class="p">(</span>
