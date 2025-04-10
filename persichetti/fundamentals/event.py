@@ -1,18 +1,27 @@
-# fundamentals/event.py
+#fundamentals/event.py
 
-from typing import Optional
+from typing import Optional, Union
+from fractions import Fraction
 
 
 class Element:
     """
     Base class for any musical time element (note or rest).
-    Duration is expressed in integer quantum units ≥ 1,
-    or None for an indefinite duration.
+
+    Duration is expressed as:
+    - an integer (e.g., 1, 2)
+    - a Fraction (e.g., 2/3, 3/5)
+    - or None (for indefinite/free durations)
+
+    Durations must be strictly > 0 if defined.
     """
 
-    def __init__(self, duration: int):
-        if duration is not None and duration < 1:
-            raise ValueError("Element duration must be ≥ 1 quantum or None for indefinite.")
+    def __init__(self, duration: Optional[Union[int, Fraction]]):
+        if duration is not None:
+            if not isinstance(duration, (int, Fraction)):
+                raise TypeError("Duration must be an int, Fraction, or None.")
+            if duration <= 0:
+                raise ValueError("Duration must be > 0 if defined.")
         self.duration = duration
 
     def is_note(self) -> bool:
@@ -23,10 +32,10 @@ class Element:
 
     def is_pitched(self) -> bool:
         return False  # overridden by Note
-    
+
     def is_unpitched(self) -> bool:
         return not self.is_pitched()
-    
+
     def kind(self) -> str:
         if self.is_rest():
             return "rest"
@@ -39,14 +48,14 @@ class Element:
     def copy(self):
         raise NotImplementedError("Must be implemented in subclass.")
 
-    def scale_duration(self, factor: int):
+    def scale_duration(self, factor: Union[int, Fraction]):
         if self.duration is None:
             raise ValueError("Cannot scale an indefinite duration.")
         raise NotImplementedError("Must be implemented in subclass.")
 
 
 class Note(Element):
-    def __init__(self, duration: int, pitch: Optional[int] = None):
+    def __init__(self, duration: Optional[Union[int, Fraction]], pitch: Optional[int] = None):
         super().__init__(duration)
         self.pitch = pitch  # None = unpitched
 
@@ -56,16 +65,17 @@ class Note(Element):
     def copy(self):
         return Note(self.duration, self.pitch)
 
-    def scale_duration(self, factor: int):
+    def scale_duration(self, factor: Union[int, Fraction]):
         if self.duration is None:
             raise ValueError("Cannot scale an indefinite duration.")
         return Note(self.duration * factor, self.pitch)
+
 
 class Rest(Element):
     def copy(self):
         return Rest(self.duration)
 
-    def scale_duration(self, factor: int):
-        if self.duration is None: 
+    def scale_duration(self, factor: Union[int, Fraction]):
+        if self.duration is None:
             raise ValueError("Cannot scale an indefinite duration.")
         return Rest(self.duration * factor)

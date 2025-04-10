@@ -1,6 +1,7 @@
-# fundamentals/melodic_motif.py
+#fundamentals/melodic_motif.py
 
-from typing import List, Optional
+from typing import List, Optional, Union
+from fractions import Fraction
 from .event import Element, Note, Rest
 from .pitch_context import PitchContext
 
@@ -10,17 +11,36 @@ class MelodicMotif:
     Represents a monophonic sequence of musical elements (Notes and Rests).
 
     A MelodicMotif may be:
-    - Free (no rhythmic duration): all elements must have duration=None.
-    - Rhythmic (quantized in time): all elements must have an integer duration.
+    - Free (unquantized): all elements must have duration=None.
+    - Rhythmic (quantized): all elements must have a numerical duration,
+      expressed in integer or fractional multiples of a quantum time unit.
+
+    ------------------
+    RHYTHMIC STRUCTURE:
+
+    Durations may be:
+    - Integer (e.g. 1, 2, 4) for simple subdivisions
+    - Fractional (e.g. 2/3, 3/5, 7/8) for complex tuplets
+
+    All durations must share a common interpretation via a quantum time unit
+    (typically specified in a `TimeContext`).
+
+    ------------------
+    PITCH STRUCTURE:
 
     A motif may include:
-    - Pitched notes (with integer pitch values)
+    - Pitched notes (int)
     - Unpitched notes (pitch=None)
-    - Rests
+    - Rests (no pitch)
 
-    Pitched notes are interpreted in one of two ways:
-    - With a PitchContext: validated against a pitch set (e.g., modal/tonal system)
-    - Without a PitchContext: pitches are relative integers, normalized so the first pitched note is 0
+    Pitched notes are interpreted as:
+    - Relative pitch classes (semitones) if `pitch_context` is None
+    - Validated modal/tonal pitches if `pitch_context` is provided
+
+    ------------------
+    Example:
+        [Note(0, Fraction(2, 3)), Note(2, Fraction(1, 3)), Rest(Fraction(1, 3))]
+        → Tuplet-like rhythmic grouping (e.g. 3 in the time of 2)
     """
 
     def __init__(
@@ -39,26 +59,29 @@ class MelodicMotif:
 
     def _validate_duration_consistency(self):
         """
-        Enforces that all elements are either durational (integer) or free (None).
+        Validates whether the motif is free or rhythmic.
+        - Free: all elements must have duration=None
+        - Rhythmic: all elements must have a numeric duration (int or Fraction)
         """
         durations = [e.duration for e in self.elements]
 
         if all(d is None for d in durations):
-            self.total_duration = None  # free motif
-        elif all(isinstance(d, int) for d in durations):
-            self.total_duration = sum(durations)  # rhythmic motif
+            self.total_duration = None  # Free motif
+        elif all(isinstance(d, (int, Fraction)) for d in durations):
+            self.total_duration = sum(Fraction(d) for d in durations)
         else:
-            raise ValueError("Motif elements must be either all durational or all free.")
+            raise ValueError(
+                "Motif elements must be either all durational (int or Fraction) or all free (None)."
+            )
 
     def _normalize_pitches(self):
         """
-        Enforces pitch validity and normalization:
-        - If pitch_context is provided, validates that all pitches are allowed.
-        - If no pitch_context, treats first pitched note as reference (pitch = 0)
-          and adjusts other pitches as semitone offsets.
+        Enforces pitch normalization:
+        - With a PitchContext: validates pitches
+        - Without context: shifts first pitched note to pitch 0
         """
         if not any(e.is_pitched() for e in self.elements):
-            return  # no pitched notes to normalize
+            return
 
         if self.pitch_context:
             reference = self.pitch_context.get_reference(
@@ -69,7 +92,6 @@ class MelodicMotif:
                     if not self.pitch_context.is_allowed(e.pitch):
                         raise ValueError(f"Pitch {e.pitch} not allowed in pitch context.")
         else:
-            # Re-center all pitched notes so that first becomes 0
             ref = self._first_pitched_note()
             for e in self.elements:
                 if e.is_pitched():
@@ -77,10 +99,9 @@ class MelodicMotif:
 
     def normalize(self):
         """
-        Re-applies pitch normalization:
-        - Validates that all pitches conform to the PitchContext, if set.
-        - Otherwise, shifts pitches so that the first pitched note becomes 0.
-        This method modifies the motif in place.
+        Re-applies pitch normalization.
+        - With a context: validates all pitches
+        - Without context: shifts first pitched note to 0
         """
         self._normalize_pitches()
 
@@ -103,16 +124,16 @@ class MelodicMotif:
 
     def is_rhythmic(self) -> bool:
         """
-        Returns True if the motif has a defined total duration.
+        Returns True if the motif has a defined rhythmic structure.
         """
         return self.total_duration is not None
 
     def is_free(self) -> bool:
         """
-        Returns True if the motif has no defined duration.
+        Returns True if the motif has no durations (i.e., free rhythm).
         """
         return self.total_duration is None
-    
+
     def get_pitch_context(self):
         """
         Returns the pitch context associated with the motif, or None if unset.
@@ -128,8 +149,8 @@ class MelodicMotif:
 
     def copy(self) -> "MelodicMotif":
         """
-        Returns a deep copy of this MelodicMotif, including all elements.
-        The pitch_context is shared (assumed immutable), but elements are copied.
+        Returns a deep copy of this MelodicMotif.
+        The pitch_context is shared (assumed immutable), but all elements are copied.
         """
         new_elements = [e.copy() for e in self.elements]
         return MelodicMotif(
